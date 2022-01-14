@@ -50,6 +50,10 @@ export const guesses = atom<string[]>({
   default: [],
 });
 
+export const useGuesses = () => {
+  return useRecoilValue(guesses);
+};
+
 const guess = atom({
   key: "guess",
   default: "",
@@ -95,28 +99,45 @@ export const useGuess = () => {
   const setGuesses = useSetRecoilState(guesses);
   const alphabet = useAlphabet();
   const dictionary = useWords();
+  const { setError } = useError();
+  const finished = !!useEndState();
 
   return {
     word: guessV,
     letters: new Set(guessV.split("").map((l) => l.toLocaleLowerCase())),
     add: (letter: string) => {
+      if (finished) {
+        return;
+      }
+
       const l = letter.toLocaleLowerCase();
       if (!alphabet.has(l)) {
         return;
       }
       setGuessV((v) => `${v}${l}`.substring(0, 5));
     },
-    remove: () => setGuessV((v) => v.substring(0, Math.max(0, v.length - 1))),
+    remove: () => {
+      if (finished) {
+        return;
+      }
+      setGuessV((v) => v.substring(0, Math.max(0, v.length - 1)));
+    },
     commit: () => {
+      if (finished) {
+        return;
+      }
+
       if (!guessV) {
         return;
       }
 
       if (guessV.length !== 5) {
+        setError("For kort (nøyaktig fem bokstaver)");
         return;
       }
 
       if (!dictionary[guessV]) {
+        setError("Ukjent ord");
         return;
       }
 
@@ -137,4 +158,41 @@ export const useNewGame = () => {
     setGuess("");
     navigate(`/${lang}/${Date.now()}`);
   }, [navigate, lang, setGuess, setGuesses]);
+};
+
+const error = atom<string>({
+  key: "error",
+  default: "",
+});
+
+export const useError = () => {
+  const [value, setError] = useRecoilState(error);
+  const callback = useCallback(
+    (errorString) => {
+      setError(errorString);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    },
+    [setError]
+  );
+  return {
+    error: value,
+    setError: callback,
+  };
+};
+
+export const useEndState = () => {
+  const guesses = useGuesses();
+  const word = useWord();
+
+  if (guesses.length === 6) {
+    return "no-guesses";
+  }
+
+  if (guesses.includes(word)) {
+    return "found-word";
+  }
+
+  return undefined;
 };

@@ -3,6 +3,7 @@
   --letter-border: #000a;
   --background-color: #fff;
   --hover-color: #eee;
+  --error-background-color: #ffb8b3;
 }
 
 @media (prefers-color-scheme: dark) {
