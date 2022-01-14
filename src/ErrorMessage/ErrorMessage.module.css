@@ -1,0 +1,20 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  border-radius: 8px;
+  background-color: var(--error-background-color);
+  color: black;
+  padding: 8px;
+  box-shadow: 0px 0px 16px 16px var(--background-color);
+}

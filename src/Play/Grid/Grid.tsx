@@ -1,9 +1,10 @@
 import { useMemo } from "react";
-import { useRecoilState } from "recoil";
-import { guesses as guessesState } from "../../state";
+import { useGuesses } from "../../state";
 import Input from "./Input";
 import Guess from "./Guess";
 import Remaining from "./Remaining";
+import EndOverlay from "./EndOverlay";
+import classes from "./Grid.module.css";
 
 type Props = {} & Pick<
   React.HTMLAttributes<HTMLDivElement>,
@@ -11,7 +12,7 @@ type Props = {} & Pick<
 >;
 
 export const Grid = (props: Props) => {
-  const [guesses] = useRecoilState(guessesState);
+  const guesses = useGuesses();
 
   const grid = useMemo(() => {
     const out = guesses.map((guess, i) => (
@@ -24,5 +25,13 @@ export const Grid = (props: Props) => {
     return out.slice(0, 6);
   }, [guesses]);
 
-  return <div {...props}>{grid}</div>;
+  return (
+    <div
+      {...props}
+      className={[props.className, classes.grid].filter(Boolean).join(" ")}
+    >
+      {grid}
+      <EndOverlay />
+    </div>
+  );
 };

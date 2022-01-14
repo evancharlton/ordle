@@ -1,0 +1,27 @@
+.overlay {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.overlay h2 {
+  font-size: 2em;
+  letter-spacing: 0.2rem;
+}
+
+.newGame {
+  margin-top: 8px;
+  font-size: 1.5em;
+  padding: 4px;
+}

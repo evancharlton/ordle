@@ -18,7 +18,7 @@ const Help = () => {
               <a
                 href="https://www.powerlanguage.co.uk/wordle/"
                 target="wordle"
-                rel="noreferrer nofollow"
+                rel="noreferrer noopener"
               >
                 Wordle
               </a>
