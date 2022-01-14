@@ -1,4 +1,5 @@
-import { useParams } from "react-router";
+import { useCallback } from "react";
+import { useNavigate, useParams } from "react-router";
 import {
   atom,
   selector,
@@ -123,4 +124,17 @@ export const useGuess = () => {
       setGuessV("");
     },
   };
+};
+
+export const useNewGame = () => {
+  const setGuesses = useSetRecoilState(guesses);
+  const setGuess = useSetRecoilState(guess);
+  const navigate = useNavigate();
+  const { lang } = useParams();
+
+  return useCallback(() => {
+    setGuesses([]);
+    setGuess("");
+    navigate(`/${lang}/${Date.now()}`);
+  }, [navigate, lang, setGuess, setGuesses]);
 };
