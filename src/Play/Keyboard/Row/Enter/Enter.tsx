@@ -1,5 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useGuess } from "../../../../state";
+import { MdOutlineKeyboardReturn } from "react-icons/md";
+import classes from "../Row.module.css";
 
 const Enter = () => {
   const { commit } = useGuess();
@@ -22,7 +24,11 @@ const Enter = () => {
     };
   }, [onKeyDown]);
 
-  return <div>Enter</div>;
+  return (
+    <div className={classes.actionKey} role="button" onClick={commit}>
+      <MdOutlineKeyboardReturn />
+    </div>
+  );
 };
 
 export default Enter;

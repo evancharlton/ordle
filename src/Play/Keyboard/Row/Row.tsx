@@ -1,4 +1,4 @@
-import Letter from "./Letter";
+import Key from "./Key";
 import classes from "./Row.module.css";
 import Enter from "./Enter";
 import Delete from "./Delete";
@@ -14,7 +14,7 @@ const Row = ({ row, final }: Props) => {
     <div className={classes.row}>
       {final && <Enter />}
       {letters.map((letter) => (
-        <Letter key={letter} letter={letter} />
+        <Key key={letter} letter={letter} />
       ))}
       {final && <Delete />}
     </div>

@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #999a;
+  width: 100%;
+  justify-content: center;
+}
+
+.header > h1 {
+  flex: 1;
+  text-align: center;
+  margin-right: 50px;
+}
