@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from "react";
 import { useGuess } from "../../../../state";
-import classes from "./Letter.module.css";
+import classes from "./Key.module.css";
 
 type Props = {
   letter: string;
 };
 
-const Letter = ({ letter }: Props) => {
+const Key = ({ letter }: Props) => {
   const { add } = useGuess();
 
   const onKeyDown = useCallback(
@@ -24,6 +24,10 @@ const Letter = ({ letter }: Props) => {
     [add, letter]
   );
 
+  const onClick = useCallback(() => {
+    add(letter);
+  }, [add, letter]);
+
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
     return () => {
@@ -31,7 +35,11 @@ const Letter = ({ letter }: Props) => {
     };
   }, [onKeyDown]);
 
-  return <div className={classes.letter}>{letter}</div>;
+  return (
+    <div className={classes.letter} onClick={onClick} role="button">
+      {letter}
+    </div>
+  );
 };
 
-export default Letter;
+export default Key;
