@@ -25,24 +25,24 @@ const Help = () => {
               . Det er bare for gøy og å lære norsk.
             </p>
             <hr />
-            <p>
+            <div className={classes.section}>
               Hver spill har et ord som fem karakterer. Du får seks forsøk for å
               finne det riktige ord.
-            </p>
-            <p>
+            </div>
+            <div className={classes.section}>
               Hvis en bokstav ser ut som dette, du har funnet da det er den
               riktige bokstaven i den riktige plassen. Bra!
               <Letter letter="ø" mode="yes" />
-            </p>
-            <p>
+            </div>
+            <div className={classes.section}>
               Hvis en bokstav ser ut som dette, du har funnet en riktig bokstav,
               men plassen er feil.
               <Letter letter="ø" mode="maybe" />
-            </p>
-            <p>
+            </div>
+            <div className={classes.section}>
               Hvis en bokstav ser ut som dette, bokstaven er ikke i ordet.
               <Letter letter="ø" mode="no" />
-            </p>
+            </div>
           </div>
         </Dialog>
       );
