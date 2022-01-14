@@ -6,7 +6,7 @@ import Dialog from "../../../Dialog";
 import Letter from "../../Grid/Letter";
 
 const Help = () => {
-  const [showing, setShowing] = useState(true);
+  const [showing, setShowing] = useState(false);
 
   const modal = useMemo(() => {
     if (showing) {
@@ -49,8 +49,6 @@ const Help = () => {
     }
     return null;
   }, [showing, setShowing]);
-
-  console.log(showing);
 
   const portal = createPortal(showing ? modal : null, document.body);
 

@@ -115,6 +115,10 @@ export const useGuess = () => {
         return;
       }
 
+      if (!dictionary[guessV]) {
+        return;
+      }
+
       setGuesses((g) => [...g, guessV]);
       setGuessV("");
     },
