@@ -8,3 +8,10 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 450px) {
+  .letter {
+    width: unset;
+    flex: 1;
+  }
+}
