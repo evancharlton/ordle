@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, useEffect } from "react";
+import { RecoilRoot } from "recoil";
+import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
+import Play from "./Play";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Today = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const now = new Date();
 
-export default App;
+    const today = [
+      now.getFullYear(),
+      `0${now.getMonth() + 1}`.substr(-2),
+      `0${now.getDate()}`.substr(-2),
+    ].join("-");
+    navigate(`/${today}`);
+  }, [navigate]);
+  return null;
+};
+
+const Root = () => (
+  <RecoilRoot>
+    <Suspense fallback={<div>Loading ...</div>}>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Today />} />
+          <Route path="/:gameId" element={<Play />} />
+        </Routes>
+      </HashRouter>
+    </Suspense>
+  </RecoilRoot>
+);
+
+export default Root;
