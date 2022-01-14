@@ -19,7 +19,7 @@
   width: 400px;
   border: 1px solid #999a;
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--background-color);
   padding: 4px;
 }
 
@@ -44,4 +44,9 @@
   background-color: transparent;
   border-left: 1px solid #ccca;
   cursor: pointer;
+  color: var(--letter-color);
+}
+
+.contents {
+  padding: 4px;
 }

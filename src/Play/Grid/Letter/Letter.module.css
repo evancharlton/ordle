@@ -1,7 +1,7 @@
 .letter {
   width: 50px;
   height: 50px;
-  border: 2px solid #000a;
+  border: 2px solid var(--letter-border);
   margin: 2px;
 
   display: flex;
@@ -12,14 +12,16 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 20pt;
+
+  color: var(--letter-color);
 }
 
 .yes {
-  background-color: #1d7a32;
+  background-color: #186622;
 }
 
 .maybe {
-  background-color: #edd972;
+  background-color: #f5c542;
 }
 
 .no {
