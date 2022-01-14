@@ -11,7 +11,7 @@
 
 .row > div:hover,
 .row > div:focus {
-  background-color: #eee;
+  background-color: var(--hover-color);
   transition: 0.25s all;
 }
 
