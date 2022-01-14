@@ -4,16 +4,18 @@
   --background-color: #fff;
   --hover-color: #eee;
   --error-background-color: #ffb8b3;
+  --end-background-color: rgb(255, 255, 255, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --letter-color: #fff;
     --letter-border: #fff6;
     --background-color: #000;
     --hover-color: #222;
+    --end-background-color: rgb(0, 0, 0, 0.5);
   }
-}
+} */
 
 body {
   color: var(--letter-color);

@@ -186,12 +186,12 @@ export const useEndState = () => {
   const guesses = useGuesses();
   const word = useWord();
 
-  if (guesses.length === 6) {
-    return "no-guesses";
-  }
-
   if (guesses.includes(word)) {
     return "found-word";
+  }
+
+  if (guesses.length === 6) {
+    return "no-guesses";
   }
 
   return undefined;
