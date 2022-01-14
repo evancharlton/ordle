@@ -23,6 +23,12 @@
   padding: 4px;
 }
 
+@media (max-width: 450px) {
+  .container {
+    width: calc(100% - 10px);
+  }
+}
+
 .header {
   width: 100%;
   border-bottom: 1px solid #ccca;

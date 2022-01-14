@@ -1,4 +1,6 @@
 .keyboard {
   text-align: center;
   width: 100%;
+
+  position: relative;
 }
