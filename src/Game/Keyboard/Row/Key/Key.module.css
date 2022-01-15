@@ -15,3 +15,9 @@
     flex: 1;
   }
 }
+
+@media (pointer: coarse) {
+  .letter {
+    height: 55px;
+  }
+}
