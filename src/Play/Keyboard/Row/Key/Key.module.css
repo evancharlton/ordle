@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .letter {
     width: unset;
     flex: 1;
