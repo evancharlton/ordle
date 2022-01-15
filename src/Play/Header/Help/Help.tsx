@@ -1,17 +1,28 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { MdInfoOutline } from "react-icons/md";
 import classes from "./Help.module.css";
 import Dialog from "../../../Dialog";
 import Letter from "../../Grid/Letter";
+import { useParams } from "react-router";
 
 const Help = () => {
-  const [showing, setShowing] = useState(true);
+  const { lang } = useParams();
+  const key = ["ordle", lang, "help-dialog"].join("/");
+  const [showing, setShowing] = useState(() => {
+    const shownTimestamp = localStorage.getItem(key);
+    return !shownTimestamp;
+  });
+
+  const onClose = useCallback(() => {
+    setShowing(false);
+    localStorage.setItem(key, String(Date.now()));
+  }, [key]);
 
   const modal = useMemo(() => {
     if (showing) {
       return (
-        <Dialog title="Ordle" onClose={() => setShowing(false)}>
+        <Dialog title="Ordle" onClose={onClose}>
           <div>
             <p>
               <strong>Ordle</strong> er en norsk variant av{" "}
@@ -55,7 +66,7 @@ const Help = () => {
       );
     }
     return null;
-  }, [showing, setShowing]);
+  }, [showing, onClose]);
 
   const portal = createPortal(showing ? modal : null, document.body);
 
