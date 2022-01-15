@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGameNumber } from "../../../state";
 import classes from "./Title.module.css";
 
@@ -8,7 +8,7 @@ const Title = () => {
   return (
     <div className={classes.container}>
       <h1>
-        <a href={`/#/${lang}`}>Ordle</a>
+        <Link to={`/${lang}`}>Ordle</Link>
       </h1>
       <span className={classes.gameNumber}># {gameNumber}</span>
     </div>
