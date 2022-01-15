@@ -1,4 +1,4 @@
-import { useWord } from "../../../App/Setup/DataLoader/context";
+import { useWord } from "../../../App/Setup/DataLoader";
 import { useEndState, useNewGame } from "../../control";
 import classes from "./EndOverlay.module.css";
 
