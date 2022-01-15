@@ -22,25 +22,19 @@ const EndOverlay = () => {
   const content = useMemo(() => {
     switch (state) {
       case "no-guesses":
-        return (
-          <div>
-            <h1>😔</h1>
-            <p>Ordet var:</p>
-            <Word word={word} />
-          </div>
-        );
+        return {
+          emoji: "😔",
+          message: "Ordet var:",
+        };
       case "found-word":
-        return (
-          <div>
-            <h1>🎉</h1>
-            <p>Bra jobbet! Du funnet ordet:</p>
-            <Word word={word} />
-          </div>
-        );
+        return {
+          emoji: "🎉",
+          message: "Bra jobbet! Du funnet ordet:",
+        };
       default:
         return null;
     }
-  }, [state, word]);
+  }, [state]);
 
   if (!content) {
     return null;
@@ -48,10 +42,16 @@ const EndOverlay = () => {
 
   return (
     <div className={classes.overlay}>
-      {content}
-      <button onClick={newGame} className={classes.newGame}>
-        Nytt spill
-      </button>
+      <div className={classes.column}>
+        <div className={classes.emoji}>{content.emoji}</div>
+        <button onClick={newGame} className={classes.newGame}>
+          Nytt spill
+        </button>
+      </div>
+      <div className={classes.column}>
+        <p>{content.message}</p>
+        <Word word={word} />
+      </div>
     </div>
   );
 };

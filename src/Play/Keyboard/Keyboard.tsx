@@ -2,6 +2,7 @@ import { useKeyboard } from "../../state";
 import Row from "./Row";
 import classes from "./Keyboard.module.css";
 import ErrorMessage from "../../ErrorMessage";
+import EndOverlay from "./EndOverlay";
 
 type Props = {} & Pick<
   React.HTMLAttributes<HTMLDivElement>,
@@ -19,6 +20,7 @@ export const Keyboard = (props: Props) => {
         <Row key={row} row={row} final={i === keyboard.length - 1} />
       ))}
       <ErrorMessage />
+      <EndOverlay />
     </div>
   );
 };

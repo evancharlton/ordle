@@ -138,13 +138,14 @@ export const useNewGame = () => {
   const setGuess = useSetRecoilState(guess);
   const navigate = useNavigate();
   const { lang } = useParams();
+  const [words] = useWordBank();
 
   return useCallback(() => {
-    console.log("yes");
     setGuesses([]);
     setGuess("");
-    navigate(`/${lang}/${Date.now()}`);
-  }, [navigate, lang, setGuess, setGuesses]);
+    const rand = Math.floor(Math.random() * words.length);
+    navigate(`/${lang}/${rand}`);
+  }, [navigate, lang, words, setGuess, setGuesses]);
 };
 
 const error = atom<string>({
