@@ -8,8 +8,8 @@
   height: 100%;
 
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 
   text-align: center;
@@ -24,4 +24,15 @@
   margin-top: 8px;
   font-size: 1.5em;
   padding: 4px;
+}
+
+.emoji {
+  font-size: 3em;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

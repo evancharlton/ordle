@@ -3,7 +3,6 @@ import { useGuesses } from "../../state";
 import Input from "./Input";
 import Guess from "./Guess";
 import Remaining from "./Remaining";
-import EndOverlay from "./EndOverlay";
 import classes from "./Grid.module.css";
 
 type Props = {} & Pick<
@@ -31,7 +30,6 @@ export const Grid = (props: Props) => {
       className={[props.className, classes.grid].filter(Boolean).join(" ")}
     >
       {grid}
-      <EndOverlay />
     </div>
   );
 };
