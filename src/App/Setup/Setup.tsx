@@ -12,11 +12,9 @@ const Setup = ({ children }: Props) => {
   const navigate = useNavigate();
 
   if (!lang) {
-    return (
-      <div>
-        <a href="/#/nb-no">nb-no</a>
-      </div>
-    );
+    // TODO: Add other languages here.
+    navigate(`/nb-no`);
+    return null;
   }
 
   if (!gameId) {
