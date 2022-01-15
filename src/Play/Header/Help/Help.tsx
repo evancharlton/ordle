@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { MdInfoOutline } from "react-icons/md";
+import { MdOutlineHelpOutline } from "react-icons/md";
 import classes from "./Help.module.css";
 import Dialog from "../../../Dialog";
 import Letter from "../../Grid/Letter";
@@ -76,7 +76,7 @@ const Help = () => {
       role="button"
       onClick={() => setShowing(true)}
     >
-      <MdInfoOutline />
+      <MdOutlineHelpOutline />
       {portal}
     </div>
   );
