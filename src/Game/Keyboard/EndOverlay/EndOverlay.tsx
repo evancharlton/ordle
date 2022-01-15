@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { useEndState, useNewGame, useWord } from "../../../state";
+import { useWord } from "../../../App/Setup/DataLoader/context";
+import { useEndState, useNewGame } from "../../control";
 import classes from "./EndOverlay.module.css";
 
 const Word = ({ word }: { word: string }) => (

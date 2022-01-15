@@ -1,8 +1,8 @@
-import { useKeyboard } from "../../state";
 import Row from "./Row";
 import classes from "./Keyboard.module.css";
 import ErrorMessage from "../../ErrorMessage";
 import EndOverlay from "./EndOverlay";
+import { useKeyboard } from "./hooks";
 
 type Props = {} & Pick<
   React.HTMLAttributes<HTMLDivElement>,

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useGuess } from "../../../state";
+import { useGuess } from "../..";
 import Letter from "../Letter";
 import classes from "./Input.module.css";
 

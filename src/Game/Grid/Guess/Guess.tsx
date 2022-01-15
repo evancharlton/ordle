@@ -1,7 +1,7 @@
 import classes from "./Guess.module.css";
-import { useWord } from "../../../state";
 import { useMemo } from "react";
 import Letter from "../Letter";
+import { useWord } from "../../../App/Setup/DataLoader/context";
 
 type Props = {
   guess: string;
