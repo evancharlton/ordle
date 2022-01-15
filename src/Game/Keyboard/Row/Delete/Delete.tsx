@@ -13,6 +13,7 @@ const Delete = () => {
       }
 
       remove();
+      e.preventDefault();
     },
     [remove]
   );
