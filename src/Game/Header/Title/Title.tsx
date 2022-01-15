@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useGameNumber } from "../../../App/Setup/DataLoader/context";
+import { useGameNumber } from "../../../App/Setup/DataLoader";
 import classes from "./Title.module.css";
 
 const Title = () => {
