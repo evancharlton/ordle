@@ -6,6 +6,7 @@ import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
 
 type Props = {
+  gameId: string;
   children: React.ReactNode;
 };
 
@@ -17,8 +18,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
   <div className={classes.center}>{children}</div>
 );
 
-const DataLoader = ({ children }: Props) => {
-  const { lang, gameId } = useParams();
+const DataLoader = ({ gameId, children }: Props) => {
+  const { lang } = useParams();
   const [words, setWords] = useState<string[]>([]);
   const [gameNumber, setGameNumber] = useState(-1);
   const [error, setError] = useState(null);

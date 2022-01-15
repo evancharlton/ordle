@@ -6,7 +6,14 @@ const Root = () => (
   <HashRouter>
     <Routes>
       <Route path="/" element={<Setup />} />
-      <Route path="/:lang" element={<Setup />} />
+      <Route
+        path="/:lang"
+        element={
+          <Setup>
+            <Play />
+          </Setup>
+        }
+      />
       <Route
         path="/:lang/:gameId"
         element={
