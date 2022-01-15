@@ -1,10 +1,10 @@
 import { Link, useParams } from "react-router-dom";
-import { useGameNumber } from "../../../state";
+import { useGameNumber } from "../../../App/Setup/DataLoader/context";
 import classes from "./Title.module.css";
 
 const Title = () => {
   const { lang } = useParams();
-  const [gameNumber] = useGameNumber();
+  const gameNumber = useGameNumber();
   return (
     <div className={classes.container}>
       <h1>

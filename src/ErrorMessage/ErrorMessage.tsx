@@ -1,4 +1,4 @@
-import { useError } from "../state";
+import { useError } from ".";
 import classes from "./ErrorMessage.module.css";
 
 const ErrorMessage = () => {

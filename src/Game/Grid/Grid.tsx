@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useGuesses } from "../../state";
 import Input from "./Input";
 import Guess from "./Guess";
 import Remaining from "./Remaining";
 import classes from "./Grid.module.css";
+import { useGuesses } from "..";
 
 type Props = {} & Pick<
   React.HTMLAttributes<HTMLDivElement>,

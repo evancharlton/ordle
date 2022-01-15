@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Play from "../Play";
+import Play from "../Game";
 import Setup from "./Setup";
 
 const Root = () => (

@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useGuess } from "../../../../state";
+import { useGuess } from "../../..";
 import classes from "./Key.module.css";
 
 type Props = {

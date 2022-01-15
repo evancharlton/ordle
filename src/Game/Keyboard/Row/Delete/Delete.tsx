@@ -1,20 +1,20 @@
 import { useCallback, useEffect } from "react";
-import { useGuess } from "../../../../state";
-import { MdOutlineKeyboardReturn } from "react-icons/md";
+import { MdOutlineBackspace } from "react-icons/md";
+import { useGuess } from "../../..";
 import classes from "../Row.module.css";
 
-const Enter = () => {
-  const { commit } = useGuess();
+const Delete = () => {
+  const { remove } = useGuess();
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.code !== "Enter") {
+      if (e.code !== "Backspace") {
         return;
       }
 
-      commit();
+      remove();
     },
-    [commit]
+    [remove]
   );
 
   useEffect(() => {
@@ -25,10 +25,10 @@ const Enter = () => {
   }, [onKeyDown]);
 
   return (
-    <div className={classes.actionKey} role="button" onClick={commit}>
-      <MdOutlineKeyboardReturn />
+    <div className={classes.actionKey} role="button" onClick={remove}>
+      <MdOutlineBackspace />
     </div>
   );
 };
 
-export default Enter;
+export default Delete;

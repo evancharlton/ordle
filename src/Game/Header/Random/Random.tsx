@@ -1,5 +1,5 @@
 import { MdOutlineAutorenew } from "react-icons/md";
-import { useNewGame } from "../../../state";
+import { useNewGame } from "../../control";
 import classes from "./Random.module.css";
 
 const Random = () => {

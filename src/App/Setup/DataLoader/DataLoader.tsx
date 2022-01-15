@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { useGameNumber, useWordBank } from "../../../state";
 import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
+import { Context } from "./context";
 
 type Props = {
   children: React.ReactNode;
@@ -19,9 +19,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 const DataLoader = ({ children }: Props) => {
   const { lang, gameId } = useParams();
-  const [words, setWords] = useWordBank();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [gameNumber, setGameNumber] = useGameNumber();
+  const [words, setWords] = useState<string[]>([]);
+  const [gameNumber, setGameNumber] = useState(-1);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -85,7 +84,16 @@ const DataLoader = ({ children }: Props) => {
     );
   }
 
-  return <>{children}</>;
+  const wordMap: Record<string, true> = {};
+  for (let i = 0; i < words.length; i += 1) {
+    wordMap[words[i]] = true;
+  }
+
+  return (
+    <Context.Provider value={{ wordList: words, wordMap, gameNumber }}>
+      {children}
+    </Context.Provider>
+  );
 };
 
 export default DataLoader;

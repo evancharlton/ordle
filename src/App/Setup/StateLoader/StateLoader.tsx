@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { useGuesses, useStorageKey } from "../../../state";
+import { useStorageKey } from "./hooks";
+import { useGuesses } from "../../../Game";
 
 type Props = {
   children: React.ReactNode;
