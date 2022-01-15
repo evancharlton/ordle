@@ -1,9 +1,9 @@
 import Header from "./Header";
 import Grid from "./Grid";
 import Keyboard from "./Keyboard";
-import classes from "./Play.module.css";
+import classes from "./Game.module.css";
 
-const Play = () => {
+const Game = () => {
   return (
     <div className={classes.container}>
       <Header />
@@ -13,4 +13,4 @@ const Play = () => {
   );
 };
 
-export default Play;
+export default Game;
