@@ -29,7 +29,7 @@ const EndOverlay = () => {
       case "found-word":
         return {
           emoji: "🎉",
-          message: "Bra jobbet! Du funnet ordet:",
+          message: "Bra jobbet! Du har funnet ordet:",
         };
       default:
         return null;
