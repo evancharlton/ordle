@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { RecoilRoot } from "recoil";
 import DataLoader from "./DataLoader";
 import StateLoader from "./StateLoader";
@@ -10,29 +10,25 @@ type Props = {
 
 const Setup = ({ children }: Props) => {
   const { lang, gameId } = useParams();
-  const navigate = useNavigate();
 
   if (!lang) {
     return <LanguageOptions />;
   }
 
+  let sanitizedGameId = gameId ?? "";
   if (!gameId) {
     const now = new Date();
 
-    const today = [
+    sanitizedGameId = [
       now.getFullYear(),
       `0${now.getMonth() + 1}`.substr(-2),
       `0${now.getDate()}`.substr(-2),
     ].join("-");
-
-    navigate(`/${lang}/${today}`);
-
-    return null;
   }
 
   return (
     <RecoilRoot>
-      <DataLoader>
+      <DataLoader gameId={sanitizedGameId}>
         <StateLoader>{children}</StateLoader>
       </DataLoader>
     </RecoilRoot>
