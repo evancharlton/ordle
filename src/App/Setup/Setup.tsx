@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import { RecoilRoot } from "recoil";
 import DataLoader from "./DataLoader";
 import StateLoader from "./StateLoader";
+import LanguageOptions from "./LanguageOptions";
 
 type Props = {
   children?: React.ReactNode;
@@ -12,9 +13,7 @@ const Setup = ({ children }: Props) => {
   const navigate = useNavigate();
 
   if (!lang) {
-    // TODO: Add other languages here.
-    navigate(`/nb-no`);
-    return null;
+    return <LanguageOptions />;
   }
 
   if (!gameId) {

@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container a {
+  font-size: 1.5em;
+  border: 1px solid #999a;
+  padding: 16px;
+  margin: 0.5em;
+  border-radius: 8px;
+}
