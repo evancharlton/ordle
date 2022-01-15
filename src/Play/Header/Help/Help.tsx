@@ -6,12 +6,12 @@ import Dialog from "../../../Dialog";
 import Letter from "../../Grid/Letter";
 
 const Help = () => {
-  const [showing, setShowing] = useState(false);
+  const [showing, setShowing] = useState(true);
 
   const modal = useMemo(() => {
     if (showing) {
       return (
-        <Dialog title="Om Ordle" onClose={() => setShowing(false)}>
+        <Dialog title="Ordle" onClose={() => setShowing(false)}>
           <div>
             <p>
               <strong>Ordle</strong> er en norsk variant av{" "}
@@ -22,26 +22,33 @@ const Help = () => {
               >
                 Wordle
               </a>
-              . Det er bare for gøy og å lære norsk.
+              . Det er bare for gøy og for å lære norsk.
             </p>
             <hr />
             <div className={classes.section}>
-              Hver spill har et ord som fem karakterer. Du får seks forsøk for å
-              finne det riktige ord.
+              Hver spill har et hemmelig ord som har fem karakterer. Du får seks
+              forsøk for å finne det riktige ord. Lykke til!
             </div>
+            <hr />
             <div className={classes.section}>
-              Hvis en bokstav ser ut som dette, du har funnet da det er den
-              riktige bokstaven i den riktige plassen. Bra!
               <Letter letter="ø" mode="yes" />
+              <p>
+                Hvis en bokstav ser ut som dette, du har funnet da det er den
+                riktige bokstaven i den riktige plassen. Bra!
+              </p>
             </div>
             <div className={classes.section}>
-              Hvis en bokstav ser ut som dette, du har funnet en riktig bokstav,
-              men plassen er feil.
               <Letter letter="ø" mode="maybe" />
+              <p>
+                Hvis en bokstav ser ut som dette, du har funnet en riktig
+                bokstav, men plassen er feil.
+              </p>
             </div>
             <div className={classes.section}>
-              Hvis en bokstav ser ut som dette, bokstaven er ikke i ordet.
               <Letter letter="ø" mode="no" />
+              <p>
+                Hvis en bokstav ser ut som dette, bokstaven er ikke i ordet.
+              </p>
             </div>
           </div>
         </Dialog>

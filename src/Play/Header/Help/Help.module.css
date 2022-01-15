@@ -11,4 +11,12 @@
 
 .section {
   margin-top: 1em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.section p {
+  margin: 0;
+  padding: 0px 8px;
+  text-align: justify;
 }
