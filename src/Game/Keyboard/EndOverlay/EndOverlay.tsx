@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useWord } from "../../../App/Setup/DataLoader/context";
 import { useEndState, useNewGame } from "../../control";
 import classes from "./EndOverlay.module.css";

@@ -1,4 +1,4 @@
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import { useDictionary } from "../App/Setup/DataLoader";
 import { useStorageKey } from "../App/Setup/StateLoader";
 import { useError } from "../ErrorMessage";
@@ -21,7 +21,7 @@ export const useGuesses = () => {
 
 export const useGuess = () => {
   const [guessV, setGuessV] = useRecoilState(guess);
-  const setGuesses = useSetRecoilState(guesses);
+  const [guessesV, setGuesses] = useRecoilState(guesses);
   const alphabet = useAlphabet();
   const dictionary = useDictionary();
   const { setError } = useError();
@@ -63,6 +63,11 @@ export const useGuess = () => {
 
       if (!dictionary[guessV]) {
         setError("Ukjent ord");
+        return;
+      }
+
+      if (guessesV.includes(guessV)) {
+        setError("Allerede prøvde");
         return;
       }
 
