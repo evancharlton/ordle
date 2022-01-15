@@ -10,6 +10,17 @@ const languages = [
   [path.join("20191010_norsk_ordbank_nob_2005", "fullformsliste.txt"), "nb-no"],
 ];
 
+const hashCode = (str) => {
+  return str
+    .split("")
+    .map((c) => c.charCodeAt(0))
+    .reduce((acc, c, i) => acc + c * Math.pow(31, Math.abs(2 - i)), 0);
+};
+
+const scatterSort = (a, b) => {
+  return hashCode(a) - hashCode(b);
+};
+
 const promises = languages.map(async ([input, output]) => {
   const promise = new Promise((resolve, reject) => {
     const readInterface = readline.createInterface({
@@ -61,7 +72,7 @@ const promises = languages.map(async ([input, output]) => {
         fs.mkdirSync(outdir);
       }
 
-      const arr = [...words].sort();
+      const arr = [...words].sort(scatterSort);
       fs.writeFileSync(
         path.join(outdir, "words.json"),
         JSON.stringify(arr, null, 2)

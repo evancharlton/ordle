@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useGameNumber } from "../DataLoader";
+import { useWord } from "../DataLoader";
 
 export const useStorageKey = () => {
   const { lang } = useParams();
-  const number = useGameNumber();
-  return Number.isNaN(number) ? "" : ["ordle", lang, number].join("/");
+  const word = useWord();
+  return ["ordle", lang, word].join("/");
 };
