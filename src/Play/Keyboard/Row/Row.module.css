@@ -22,3 +22,32 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 500px) {
+  .row > div {
+    margin: 0px;
+    border-radius: 0;
+    border-top-width: 1px;
+    border-left-width: 0px;
+  }
+
+  .row:first-child > div {
+    border-bottom: 0;
+  }
+
+  .row > div:last-child {
+    border-right: 0;
+  }
+  .row > div:first-child {
+    border-left: 0;
+  }
+
+  .row:last-child > div {
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .row:last-child > div:nth-child(2) {
+    border-left-width: 1px;
+  }
+}

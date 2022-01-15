@@ -23,7 +23,7 @@
   padding: 4px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .container {
     width: calc(100% - 10px);
   }
