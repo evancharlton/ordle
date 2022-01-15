@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from "react-router";
+import { RecoilRoot } from "recoil";
 import DataLoader from "./DataLoader";
+import StateLoader from "./StateLoader";
 
 type Props = {
   children?: React.ReactNode;
@@ -31,7 +33,13 @@ const Setup = ({ children }: Props) => {
     return null;
   }
 
-  return <DataLoader>{children}</DataLoader>;
+  return (
+    <RecoilRoot>
+      <DataLoader>
+        <StateLoader>{children}</StateLoader>
+      </DataLoader>
+    </RecoilRoot>
+  );
 };
 
 export default Setup;

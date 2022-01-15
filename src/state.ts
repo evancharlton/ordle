@@ -65,7 +65,7 @@ export const useWordBank = () => {
 };
 
 export const useGuesses = () => {
-  return useRecoilValue(guesses);
+  return useRecoilState(guesses);
 };
 
 export const useWord = () => {
@@ -81,6 +81,7 @@ export const useGuess = () => {
   const dictionary = useRecoilValue(wordLookup);
   const { setError } = useError();
   const finished = !!useEndState();
+  const key = useStorageKey();
 
   return {
     word: guessV,
@@ -120,7 +121,13 @@ export const useGuess = () => {
         return;
       }
 
-      setGuesses((g) => [...g, guessV]);
+      setGuesses((g) => {
+        const next = [...g, guessV];
+        if (key) {
+          localStorage.setItem(key, JSON.stringify(next));
+        }
+        return next;
+      });
       setGuessV("");
     },
   };
@@ -133,6 +140,7 @@ export const useNewGame = () => {
   const { lang } = useParams();
 
   return useCallback(() => {
+    console.log("yes");
     setGuesses([]);
     setGuess("");
     navigate(`/${lang}/${Date.now()}`);
@@ -162,7 +170,7 @@ export const useError = () => {
 };
 
 export const useEndState = () => {
-  const guesses = useGuesses();
+  const [guesses] = useGuesses();
   const word = useWord();
 
   if (guesses.includes(word)) {
@@ -174,4 +182,10 @@ export const useEndState = () => {
   }
 
   return undefined;
+};
+
+export const useStorageKey = () => {
+  const { lang } = useParams();
+  const [number] = useGameNumber();
+  return Number.isNaN(number) ? "" : ["ordle", lang, number].join("/");
 };

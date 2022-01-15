@@ -12,11 +12,11 @@ type Props = {} & Pick<
 >;
 
 export const Grid = (props: Props) => {
-  const guesses = useGuesses();
+  const [guesses] = useGuesses();
 
   const grid = useMemo(() => {
     const out = guesses.map((guess, i) => (
-      <Guess key={`guess-${i}`} guess={guess} />
+      <Guess key={`guess-${i}-${guess}`} guess={guess} />
     ));
     out.push(<Input key="input" />);
     for (let i = 0; i < 5; i += 1) {

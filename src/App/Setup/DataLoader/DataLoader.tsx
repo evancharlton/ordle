@@ -76,7 +76,7 @@ const DataLoader = ({ children }: Props) => {
     );
   }
 
-  if (gameNumber < 0) {
+  if (gameNumber < 0 || Number.isNaN(gameNumber)) {
     return (
       <Container>
         <div className={classes.loader}></div>
