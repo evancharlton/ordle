@@ -3,6 +3,7 @@ import { RecoilRoot } from "recoil";
 import DataLoader from "./DataLoader";
 import StateLoader from "./StateLoader";
 import LanguageOptions from "./LanguageOptions";
+import Game from "../../Game";
 
 type Props = {
   children?: React.ReactNode;
@@ -29,7 +30,9 @@ const Setup = ({ children }: Props) => {
   return (
     <RecoilRoot>
       <DataLoader gameId={sanitizedGameId}>
-        <StateLoader>{children}</StateLoader>
+        <StateLoader>
+          <Game />
+        </StateLoader>
       </DataLoader>
     </RecoilRoot>
   );

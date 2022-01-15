@@ -1,2 +1,2 @@
-export { default } from "./Play";
+export { default } from "./Game";
 export * from "./guess";
