@@ -8,35 +8,20 @@ import {
   useSetRecoilState,
 } from "recoil";
 
-const hashCode = (str: string) => {
-  return str.split("").reduceRight((acc, c) => acc + c.charCodeAt(0) * 31, 0);
-};
-
-const gameKey = atom({
-  key: "gameKey",
-  default: "",
+const gameNumber = atom<number>({
+  key: "gameNumber",
+  default: -1,
 });
 
-const language = atom({
-  key: "lang",
-  default: "nb-no",
-});
-
-const wordBank = selector<string[]>({
+const wordBank = atom<string[]>({
   key: "wordBank",
-  get: async ({ get }) => {
-    const lang = get(language);
-    const data = await fetch(
-      [process.env.PUBLIC_URL, lang, "words.json"].join("/")
-    ).then((resp) => resp.json());
-    return data;
-  },
+  default: [],
 });
 
 const wordLookup = selector<Record<string, true>>({
   key: "wordLookup",
-  get: async ({ get }) => {
-    const words = await get(wordBank);
+  get: ({ get }) => {
+    const words = get(wordBank);
     const lookup: Record<string, true> = {};
     words.forEach((word) => {
       lookup[word] = true;
@@ -45,23 +30,15 @@ const wordLookup = selector<Record<string, true>>({
   },
 });
 
-export const guesses = atom<string[]>({
+const guesses = atom<string[]>({
   key: "guesses",
   default: [],
 });
-
-export const useGuesses = () => {
-  return useRecoilValue(guesses);
-};
 
 const guess = atom({
   key: "guess",
   default: "",
 });
-
-export const useLanguage = () => {
-  return useRecoilValue(language);
-};
 
 const KEYBOARDS = {
   "nb-no": ["qwertyuiopå", "asdfghjkløæ", "zxcvbnm"],
@@ -69,7 +46,7 @@ const KEYBOARDS = {
 } as const;
 
 export const useKeyboard = (): string[] => {
-  const lang = useRecoilValue(language);
+  const { lang } = useParams();
   // @ts-expect-error
   return KEYBOARDS[lang] ?? [];
 };
@@ -79,32 +56,34 @@ export const useAlphabet = () => {
   return new Set(keyboard.join("").split(""));
 };
 
-export const useGameKey = () => {
-  return useRecoilState(gameKey);
+export const useGameNumber = () => {
+  return useRecoilState(gameNumber);
 };
 
-export const useWords = () => {
-  return useRecoilValue(wordLookup);
+export const useWordBank = () => {
+  return useRecoilState(wordBank);
+};
+
+export const useGuesses = () => {
+  return useRecoilValue(guesses);
 };
 
 export const useWord = () => {
-  const bank = useRecoilValue(wordBank) ?? [];
-  const { gameId } = useParams();
-  const hash = hashCode(gameId ?? "");
-  return bank[hash % bank.length];
+  const words = useRecoilValue(wordBank);
+  const number = useRecoilValue(gameNumber);
+  return words[number];
 };
 
 export const useGuess = () => {
   const [guessV, setGuessV] = useRecoilState(guess);
   const setGuesses = useSetRecoilState(guesses);
   const alphabet = useAlphabet();
-  const dictionary = useWords();
+  const dictionary = useRecoilValue(wordLookup);
   const { setError } = useError();
   const finished = !!useEndState();
 
   return {
     word: guessV,
-    letters: new Set(guessV.split("").map((l) => l.toLocaleLowerCase())),
     add: (letter: string) => {
       if (finished) {
         return;
