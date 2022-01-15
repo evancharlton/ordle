@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { useGameNumber, useWordBank } from "../../../state";
 import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
@@ -60,9 +61,9 @@ const DataLoader = ({ children }: Props) => {
     return (
       <Container>
         <h1>
-          <a href="/">
+          <Link to="/">
             <MdErrorOutline />
-          </a>
+          </Link>
         </h1>
       </Container>
     );
