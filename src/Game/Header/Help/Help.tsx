@@ -44,8 +44,8 @@ const Help = () => {
             <div className={classes.section}>
               <Letter letter="ø" mode="yes" />
               <p>
-                Hvis en bokstav ser ut som dette, du har funnet da det er den
-                riktige bokstaven i den riktige plassen. Bra!
+                Hvis en bokstav ser ut som dette, det er den riktige bokstaven i
+                den riktige plassen. Bra!
               </p>
             </div>
             <div className={classes.section}>
