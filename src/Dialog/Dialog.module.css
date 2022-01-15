@@ -32,7 +32,7 @@
 .header {
   width: 100%;
   border-bottom: 1px solid #ccca;
-  padding: 2px;
+  padding: 4px 0;
   font-size: 16pt;
   text-align: center;
 }
