@@ -37,28 +37,28 @@ const Help = () => {
             </p>
             <hr />
             <div className={classes.section}>
-              Hver spill har et hemmelig ord som har fem karakterer. Du får seks
-              forsøk for å finne det riktige ord. Lykke til!
+              Hver omgang har et hemmelig ord som består av fem bokstaver. Du
+              har seks forsøk på å finne det riktige ordet. Lykke til!
             </div>
             <hr />
             <div className={classes.section}>
               <Letter letter="ø" mode="yes" />
               <p>
-                Hvis en bokstav ser ut som dette, det er den riktige bokstaven i
+                Hvis en bokstav ser ut som dette, er den riktige bokstaven på
                 den riktige plassen. Bra!
               </p>
             </div>
             <div className={classes.section}>
               <Letter letter="ø" mode="maybe" />
               <p>
-                Hvis en bokstav ser ut som dette, du har funnet en riktig
+                Hvis en bokstav ser ut som dette, har du funnet en riktig
                 bokstav, men plassen er feil.
               </p>
             </div>
             <div className={classes.section}>
               <Letter letter="ø" mode="no" />
               <p>
-                Hvis en bokstav ser ut som dette, bokstaven er ikke i ordet.
+                Hvis en bokstav ser ut som dette, er ikke bokstaven i ordet.
               </p>
             </div>
           </div>
