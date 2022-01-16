@@ -29,6 +29,7 @@ const Key = ({ letter }: Props) => {
 
   const onClick = useCallback(() => {
     add(letter);
+    navigator.vibrate(10);
   }, [add, letter]);
 
   useEffect(() => {

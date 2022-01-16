@@ -26,7 +26,14 @@ const Delete = () => {
   }, [onKeyDown]);
 
   return (
-    <div className={classes.actionKey} role="button" onClick={remove}>
+    <div
+      className={classes.actionKey}
+      role="button"
+      onClick={() => {
+        remove();
+        navigator.vibrate(10);
+      }}
+    >
       <MdOutlineBackspace />
     </div>
   );
