@@ -9,6 +9,22 @@
   align-items: center;
 }
 
+.yes {
+  background-color: var(--yes-color);
+}
+
+.maybe {
+  background-color: var(--maybe-color);
+}
+
+.no {
+  background-color: var(--no-color);
+}
+
+.unknown {
+  background-color: var(--unknown-color);
+}
+
 @media (max-width: 500px) {
   .letter {
     width: unset;

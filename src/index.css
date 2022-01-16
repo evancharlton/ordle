@@ -5,6 +5,10 @@
   --hover-color: #eee;
   --error-background-color: #ffb8b3;
   --end-background-color: rgb(255, 255, 255, 0.5);
+  --yes-color: #186622;
+  --maybe-color: #f5c542;
+  --no-color: #111a;
+  --unknown-color: #999a;
 }
 
 @media (prefers-color-scheme: dark) {

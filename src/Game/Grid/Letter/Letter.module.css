@@ -17,13 +17,13 @@
 }
 
 .yes {
-  background-color: #186622;
+  background-color: var(--yes-color);
 }
 
 .maybe {
-  background-color: #f5c542;
+  background-color: var(--maybe-color);
 }
 
 .no {
-  background-color: #111a;
+  background-color: var(--no-color);
 }
