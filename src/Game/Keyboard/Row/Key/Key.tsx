@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+import { useLetterMap } from "../..";
 import { useGuess } from "../../..";
 import classes from "./Key.module.css";
 
@@ -8,6 +9,8 @@ type Props = {
 
 const Key = ({ letter }: Props) => {
   const { add } = useGuess();
+
+  const state = useLetterMap(letter);
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -36,7 +39,19 @@ const Key = ({ letter }: Props) => {
   }, [onKeyDown]);
 
   return (
-    <div className={classes.letter} onClick={onClick} role="button">
+    <div
+      className={[
+        classes.letter,
+        state === "yes" && classes.yes,
+        state === "maybe" && classes.maybe,
+        state === "no" && classes.no,
+        state === "unknown" && classes.unknown,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      onClick={onClick}
+      role="button"
+    >
       {letter}
     </div>
   );

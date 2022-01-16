@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useKeyboardContext } from "./context";
 
 type Keyboard = string[];
 
@@ -24,4 +25,9 @@ export const useKeyboard = () => {
 export const useAlphabet = () => {
   const keyboard = useKeyboard();
   return new Set(keyboard.join("").split(""));
+};
+
+export const useLetterMap = (letter: string) => {
+  const { letterMap } = useKeyboardContext();
+  return letterMap[letter] ?? "unknown";
 };
