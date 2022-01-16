@@ -25,7 +25,14 @@ const Enter = () => {
   }, [onKeyDown]);
 
   return (
-    <div className={classes.actionKey} role="button" onClick={commit}>
+    <div
+      className={classes.actionKey}
+      role="button"
+      onClick={() => {
+        commit();
+        navigator.vibrate(10);
+      }}
+    >
       <MdOutlineKeyboardReturn />
     </div>
   );
