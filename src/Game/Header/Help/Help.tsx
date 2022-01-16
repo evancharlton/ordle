@@ -35,7 +35,6 @@ const Help = () => {
               </a>
               . Det er bare for gøy og for å lære norsk.
             </p>
-            <hr />
             <div className={classes.section}>
               Hver omgang har et hemmelig ord som består av fem bokstaver. Du
               har seks forsøk på å finne det riktige ordet. Lykke til!
@@ -61,6 +60,23 @@ const Help = () => {
                 Hvis en bokstav ser ut som dette, er ikke bokstaven i ordet.
               </p>
             </div>
+            <hr />
+            <h3>
+              «<i>Hva er disse ordene?</i>»
+            </h3>
+            <p>
+              Ordene som brukes i app-en kommer fra{" "}
+              <a href="https://nb.no" target="_blank" rel="noopener noreferrer">
+                Nasjonalbiblioteket's ordbank
+              </a>
+              .{" "}
+              <blockquote>
+                Fullformslisten inneholder alle mulige bøyde former av
+                oppslagsordene i tråd med gjeldende rettskrivning. Denne
+                tabellen inneholder også former som er tenkelige, men i praksis
+                brukes sjelden eller aldri.
+              </blockquote>
+            </p>
           </div>
         </Dialog>
       );

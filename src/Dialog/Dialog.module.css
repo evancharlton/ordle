@@ -56,3 +56,17 @@
 .contents {
   padding: 4px;
 }
+
+.contents blockquote {
+  border-left: 2px solid #999a;
+  padding: 4px 16px;
+  margin-left: 4px;
+  font-style: italic;
+  color: #eeea;
+}
+
+@media (prefers-color-scheme: light) {
+  .contents blockquote {
+    color: #111a;
+  }
+}
