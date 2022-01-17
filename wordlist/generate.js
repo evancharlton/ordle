@@ -21,7 +21,10 @@ const scatterSort = (a, b) => {
   return hashCode(a) - hashCode(b);
 };
 
+const alphabet = new Set("abcdefghijklmnopqrstuvwxyzæøå".split(""));
+
 const promises = languages.map(async ([input, output]) => {
+  let filtered = 0;
   const promise = new Promise((resolve, reject) => {
     const readInterface = readline.createInterface({
       input: fs.createReadStream(path.join(__dirname, input), {
@@ -57,6 +60,10 @@ const promises = languages.map(async ([input, output]) => {
       const letters = [...new Set(word.split(""))];
 
       if (letters.find(invalidLetter)) {
+        return;
+      }
+
+      if (!letters.every((letter) => alphabet.has(letter))) {
         return;
       }
 
