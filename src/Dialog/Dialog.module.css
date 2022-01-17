@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.container {
+.dialog {
   width: 400px;
   border: 1px solid #999a;
   border-radius: 4px;
@@ -24,7 +24,7 @@
 }
 
 @media (max-width: 500px) {
-  .container {
+  .dialog {
     width: calc(100% - 10px);
   }
 }
@@ -51,6 +51,12 @@
   border-left: 1px solid #ccca;
   cursor: pointer;
   color: var(--letter-color);
+  transition: 0.2s all;
+}
+
+.header button:hover,
+.header button:focus {
+  background-color: #999a;
 }
 
 .contents {
@@ -69,4 +75,27 @@
   .contents blockquote {
     color: #111a;
   }
+}
+
+.dialog footer {
+  text-align: center;
+  border-top: 1px solid #999a;
+  padding: 4px;
+}
+
+.dialog footer button {
+  background-color: transparent;
+  border: 0;
+  font-size: 14pt;
+  color: var(--letter-color);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: 100%;
+  transition: 0.2s all;
+}
+
+.dialog footer button:hover,
+.dialog footer button:focus {
+  background-color: #999a;
 }

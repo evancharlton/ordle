@@ -15,12 +15,15 @@ const Dialog = ({ title, children, onClose }: Props) => {
         onClose();
       }}
     >
-      <div className={classes.container} onClick={(e) => e.stopPropagation()}>
+      <div className={classes.dialog} onClick={(e) => e.stopPropagation()}>
         <div className={classes.header}>
           {title}
           <button onClick={onClose}>X</button>
         </div>
         <div className={classes.contents}>{children}</div>
+        <footer>
+          <button onClick={onClose}>Lukk</button>
+        </footer>
       </div>
     </div>
   );
