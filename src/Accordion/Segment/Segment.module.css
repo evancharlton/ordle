@@ -1,0 +1,39 @@
+.segment {
+  display: flex;
+  flex-direction: column;
+}
+
+.segment header {
+  border: 1px solid #999a;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16pt;
+}
+
+.icon {
+  font-size: 16pt;
+}
+
+.segment .content {
+  /* border: 1px solid #999a; */
+  padding: 4px;
+  border-radius: 0 4px 4px 0;
+  margin: 8px;
+
+  border-top: 0;
+  margin-top: 0;
+  overflow: hidden;
+
+  transition: all 0.75s;
+}
+
+.active .content {
+  max-height: 400px;
+}
+
+.inactive .content {
+  max-height: 0px;
+}
