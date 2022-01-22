@@ -39,6 +39,11 @@ export const useGuess = () => {
       if (!alphabet.has(l)) {
         return;
       }
+
+      try {
+        // @ts-expect-error
+        document.activeElement?.blur();
+      } catch {}
       setGuessV((v) => `${v}${l}`.substring(0, 5));
     },
     remove: () => {
