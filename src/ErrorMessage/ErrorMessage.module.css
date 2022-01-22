@@ -18,5 +18,5 @@
   background-color: var(--error-background-color);
   color: black;
   padding: 8px;
-  box-shadow: 0px 0px 16px 16px var(--background-color);
+  box-shadow: 0px 0px 24px 4px var(--background-color);
 }
