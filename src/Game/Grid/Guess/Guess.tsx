@@ -2,6 +2,7 @@ import classes from "./Guess.module.css";
 import { useMemo } from "react";
 import Letter from "../Letter";
 import { useWord } from "../../../App/Setup/DataLoader";
+import { MdOpenInNew } from "react-icons/md";
 
 type Props = {
   guess: string;
@@ -55,7 +56,20 @@ const Guess = ({ guess }: Props) => {
     return out;
   }, [word, guess]);
 
-  return <div className={classes.guess}>{letters}</div>;
+  return (
+    <a
+      href={`https://naob.no/søk/${guess}`}
+      target="_blank"
+      rel="noreferrer noopener"
+      className={classes.guess}
+    >
+      <div className={classes.spacer}></div>
+      {letters}
+      <div className={classes.spacer}>
+        <MdOpenInNew />
+      </div>
+    </a>
+  );
 };
 
 export default Guess;

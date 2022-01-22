@@ -9,6 +9,8 @@
   --maybe-color: #f5c542;
   --no-color: #111a;
   --unknown-color: #999a;
+  --link-color: #0aacf2;
+  --dictionary-color: #999a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,7 +35,7 @@ html {
 
 a,
 a:visited {
-  color: #0aacf2;
+  color: var(--link-color);
   text-decoration: none;
 }
 

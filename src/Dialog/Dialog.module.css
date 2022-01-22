@@ -51,7 +51,7 @@
   border-left: 1px solid #ccca;
   cursor: pointer;
   color: var(--letter-color);
-  transition: 0.2s all;
+  transition: all 0.2s;
 }
 
 .header button:hover,
@@ -92,7 +92,7 @@
   padding: 4px 8px;
   border-radius: 4px;
   width: 100%;
-  transition: 0.2s all;
+  transition: all 0.2s;
 }
 
 .dialog footer button:hover,

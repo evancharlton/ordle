@@ -1,4 +1,32 @@
-.guess {
+.guess,
+.guess:hover,
+.guess:active,
+.guess:focus,
+.guess:visited {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.spacer {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 8px;
+  font-size: 16pt;
+}
+
+.guess .spacer {
+  color: var(--dictionary-color);
+  transition: all 0.2s;
+}
+
+.guess:hover .spacer,
+.guess:focus .spacer,
+.guess:active .spacer {
+  color: var(--link-color);
 }
