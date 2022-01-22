@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useLetterMap } from "../..";
 import { useGuess } from "../../..";
 import classes from "./Key.module.css";
@@ -8,6 +8,7 @@ type Props = {
 };
 
 const Key = ({ letter }: Props) => {
+  const ref = useRef<HTMLDivElement | null>(null);
   const { add } = useGuess();
 
   const state = useLetterMap(letter);
@@ -23,6 +24,7 @@ const Key = ({ letter }: Props) => {
       }
 
       add(letter);
+      ref.current?.focus();
     },
     [add, letter]
   );
@@ -52,6 +54,8 @@ const Key = ({ letter }: Props) => {
         .join(" ")}
       onClick={onClick}
       role="button"
+      ref={ref}
+      tabIndex={0}
     >
       {letter}
     </div>

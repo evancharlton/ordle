@@ -13,6 +13,11 @@ const Enter = () => {
       }
 
       commit();
+
+      try {
+        // @ts-expect-error
+        document.activeElement?.blur();
+      } catch {}
     },
     [commit]
   );
