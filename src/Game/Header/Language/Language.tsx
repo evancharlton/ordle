@@ -9,8 +9,8 @@ type Info = {
 };
 
 const LANGUAGES = [
-  { name: "Norsk (bokmål)", flag: "🇳🇴", code: "nb-no" },
-  { name: "Norsk (nynorsk)", flag: "🇳🇴", code: "nn-no" },
+  { name: "bokmål", flag: "🇳🇴", code: "nb-no" },
+  { name: "nynorsk", flag: "🇳🇴", code: "nn-no" },
 ] as const;
 
 const LOOKUP: Record<string, Info> = LANGUAGES.reduce(
