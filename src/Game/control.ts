@@ -7,7 +7,7 @@ export const useEndState = () => {
   const [guesses] = useGuesses();
   const word = useWord();
 
-  if (guesses.includes(word)) {
+  if (guesses[word]) {
     return "found-word";
   }
 
@@ -26,7 +26,7 @@ export const useNewGame = () => {
   const words = useWords();
 
   return useCallback(() => {
-    setGuesses([]);
+    setGuesses({});
     clear();
     const rand = Math.floor(Math.random() * words.length);
     navigate(`/${lang}/${rand}`);

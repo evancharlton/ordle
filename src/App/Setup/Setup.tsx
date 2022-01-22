@@ -5,11 +5,7 @@ import StateLoader from "./StateLoader";
 import LanguageOptions from "./LanguageOptions";
 import Game from "../../Game";
 
-type Props = {
-  children?: React.ReactNode;
-};
-
-const Setup = ({ children }: Props) => {
+const Setup = () => {
   const { lang, gameId } = useParams();
 
   if (!lang) {
