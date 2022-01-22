@@ -7,6 +7,12 @@
   width: 50px;
   height: 100%;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.helpIcon:hover,
+.helpIcon:focus {
+  color: white;
 }
 
 .section {

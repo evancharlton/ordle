@@ -7,4 +7,16 @@
   width: 50px;
   height: 100%;
   cursor: pointer;
+
+  filter: saturate(0);
+  transition: all 0.2s;
+
+  text-decoration: none;
+}
+
+.flag:hover,
+.flag:active,
+.flag:focus {
+  filter: saturate(1);
+  text-decoration: none;
 }
