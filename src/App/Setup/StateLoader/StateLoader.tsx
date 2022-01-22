@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useStorageKey } from "./hooks";
-import { useGuesses } from "../../../Game";
+import { GuessMap, useGuesses } from "../../../Game";
 
 type Props = {
   children: React.ReactNode;
@@ -14,37 +14,38 @@ const StateLoader = ({ children }: Props) => {
   useEffect(() => {
     const guesses = (() => {
       if (!key) {
-        return [];
+        return {};
       }
 
       const stored = localStorage.getItem(key);
       if (!stored) {
-        return [];
+        return {};
       }
 
       const parsed = (() => {
         try {
           return JSON.parse(stored);
         } catch (ex) {
-          return [];
+          return {};
         }
       })();
 
       if (!parsed) {
-        return [];
+        return {};
       }
 
-      if (!Array.isArray(parsed)) {
-        return [];
+      const keys = Object.keys(parsed);
+      if (keys.length === 0) {
+        return {};
       }
 
       if (
-        !parsed.every((item) => typeof item === "string" && item.length === 5)
+        !keys.every((item) => typeof item === "string" && item.length === 5)
       ) {
-        return [];
+        return {};
       }
 
-      return parsed;
+      return parsed as GuessMap;
     })();
 
     setGuesses(guesses);

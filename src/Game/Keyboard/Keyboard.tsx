@@ -15,9 +15,10 @@ type Props = {} & Pick<
 
 export const Keyboard = (props: Props) => {
   const keyboard = useKeyboard();
-  const [guesses] = useGuesses();
+  const [guessMap] = useGuesses();
   const word = useWord();
 
+  const guesses = Object.keys(guessMap);
   const letterMap: KeyboardContextType["letterMap"] = useMemo(() => {
     const letterMap: KeyboardContextType["letterMap"] = {};
 

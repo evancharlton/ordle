@@ -14,9 +14,11 @@ export const Grid = (props: Props) => {
   const [guesses] = useGuesses();
 
   const grid = useMemo(() => {
-    const out = guesses.map((guess, i) => (
-      <Guess key={`guess-${i}-${guess}`} guess={guess} />
-    ));
+    const out = Object.entries(guesses)
+      .sort((a, b) => a[1] - b[1])
+      .map(([guess, when]) => (
+        <Guess key={`guess-${when}-${guess}`} guess={guess} />
+      ));
     out.push(<Input key="input" />);
     for (let i = 0; i < 5; i += 1) {
       out.push(<Remaining key={`remaining-${i}`} />);

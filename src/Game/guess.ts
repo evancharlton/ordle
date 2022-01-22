@@ -5,9 +5,11 @@ import { useError } from "../ErrorMessage";
 import { useAlphabet } from "./Keyboard";
 import { useEndState } from "./control";
 
-const guesses = atom<string[]>({
+export type GuessMap = Record<string, number>;
+
+const guesses = atom<GuessMap>({
   key: "guesses",
-  default: [],
+  default: {},
 });
 
 const guess = atom({
@@ -21,7 +23,7 @@ export const useGuesses = () => {
 
 export const useGuess = () => {
   const [guessV, setGuessV] = useRecoilState(guess);
-  const [guessesV, setGuesses] = useRecoilState(guesses);
+  const [guessesV, setGuesses] = useGuesses();
   const alphabet = useAlphabet();
   const dictionary = useDictionary();
   const { setError } = useError();
@@ -67,13 +69,16 @@ export const useGuess = () => {
         return;
       }
 
-      if (guessesV.includes(guessV)) {
+      if (guessesV[guessV]) {
         setError("Allerede prøvde");
         return;
       }
 
       setGuesses((g) => {
-        const next = [...g, guessV];
+        const next = {
+          ...g,
+          [guessV]: Date.now(),
+        };
         if (key) {
           localStorage.setItem(key, JSON.stringify(next));
         }
