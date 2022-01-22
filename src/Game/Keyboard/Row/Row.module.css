@@ -12,7 +12,7 @@
 .row > div:hover,
 .row > div:focus {
   background-color: var(--hover-color);
-  transition: 0.25s all;
+  transition: all 0.25s;
 }
 
 .actionKey {
