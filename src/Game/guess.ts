@@ -4,8 +4,27 @@ import { useStorageKey } from "../App/Setup/StateLoader";
 import { useError } from "../ErrorMessage";
 import { useAlphabet } from "./Keyboard";
 import { useEndState } from "./control";
+import { NewGuess } from "../custom-events";
 
 export type GuessMap = Record<string, number>;
+
+export const isGuessMap = (item: unknown): item is GuessMap => {
+  if (!item) {
+    return false;
+  }
+
+  if (Array.isArray(item)) {
+    return false;
+  }
+
+  if (!(typeof item === "object")) {
+    return false;
+  }
+
+  return Object.keys(item).every(
+    (key) => typeof key === "string" && key.length === 5
+  );
+};
 
 const guesses = atom<GuessMap>({
   key: "guesses",
@@ -85,6 +104,7 @@ export const useGuess = () => {
         return next;
       });
       setGuessV("");
+      dispatchEvent(new NewGuess(guessV, new Date(), "local"));
     },
     clear: () => setGuessV(""),
   };

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
+import Loading from "../../../Loading";
 
 type Props = {
   gameId: string;
@@ -13,10 +14,6 @@ type Props = {
 const hashCode = (str: string) => {
   return str.split("").reduceRight((acc, c) => acc + c.charCodeAt(0) * 31, 0);
 };
-
-const Container = ({ children }: { children: React.ReactNode }) => (
-  <div className={classes.center}>{children}</div>
-);
 
 const DataLoader = ({ gameId, children }: Props) => {
   const { lang } = useParams();
@@ -59,30 +56,22 @@ const DataLoader = ({ gameId, children }: Props) => {
 
   if (error) {
     return (
-      <Container>
+      <div className={classes.center}>
         <h1>
           <Link to="/">
             <MdErrorOutline />
           </Link>
         </h1>
-      </Container>
+      </div>
     );
   }
 
   if (!words || words.length === 0) {
-    return (
-      <Container>
-        <div className={classes.loader}></div>
-      </Container>
-    );
+    return <Loading />;
   }
 
   if (gameNumber < 0 || Number.isNaN(gameNumber)) {
-    return (
-      <Container>
-        <div className={classes.loader}></div>
-      </Container>
-    );
+    return <Loading />;
   }
 
   const wordMap: Record<string, true> = {};

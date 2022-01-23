@@ -2,6 +2,7 @@ import Help from "./Help";
 import Random from "./Random";
 import Title from "./Title";
 import Language from "./Language";
+import Login from "./Login";
 import classes from "./Header.module.css";
 
 type Props = {} & Pick<
@@ -18,7 +19,7 @@ export const Header = (props: Props) => {
       <Help />
       <Language />
       <Title />
-      <div style={{ width: 50 }} />
+      <Login />
       <Random />
     </div>
   );
