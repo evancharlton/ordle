@@ -11,7 +11,7 @@ export const useEndState = () => {
     return "found-word";
   }
 
-  if (guesses.length === 6) {
+  if (Object.keys(guesses).length === 6) {
     return "no-guesses";
   }
 

@@ -18,6 +18,8 @@
 .overlay h2 {
   font-size: 2em;
   letter-spacing: 0.2rem;
+  margin: 0;
+  padding: 0;
 }
 
 .newGame {
@@ -35,4 +37,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+
+  height: 100%;
 }
