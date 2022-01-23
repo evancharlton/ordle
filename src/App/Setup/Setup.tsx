@@ -4,6 +4,7 @@ import DataLoader from "./DataLoader";
 import StateLoader from "./StateLoader";
 import LanguageOptions from "./LanguageOptions";
 import Game from "../../Game";
+import FirebaseSyncer from "./FirebaseSyncer";
 
 const Setup = () => {
   const { lang, gameId } = useParams();
@@ -26,9 +27,11 @@ const Setup = () => {
   return (
     <RecoilRoot>
       <DataLoader gameId={sanitizedGameId}>
-        <StateLoader>
-          <Game />
-        </StateLoader>
+        <FirebaseSyncer>
+          <StateLoader>
+            <Game />
+          </StateLoader>
+        </FirebaseSyncer>
       </DataLoader>
     </RecoilRoot>
   );
