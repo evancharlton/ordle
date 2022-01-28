@@ -1,6 +1,7 @@
 {
   "name": "ordle",
   "homepage": "https://evancharlton.github.io/ordle",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
