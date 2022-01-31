@@ -2,15 +2,15 @@ import { useAccordion } from "../context";
 import classes from "./Segment.module.css";
 import { MdExpandMore, MdChevronRight } from "react-icons/md";
 
-type Props = {
+export type Props = {
   id: string;
   title: string | React.ReactNode;
   children: React.ReactNode;
 };
 
 const Segment = ({ id, title, children }: Props) => {
-  const { segment, setActive } = useAccordion();
-  const active = segment === id;
+  const { segments, setActive } = useAccordion();
+  const active = !!segments[id];
   return (
     <div
       className={[

@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
 
 type AccordionContextType = {
-  segment: string;
+  segments: Record<string, boolean>;
   setActive: (segment: string) => void;
 };
 
 export const AccordionContext = createContext<AccordionContextType>({
-  segment: "",
+  segments: {},
   setActive: () => {
     throw new Error("Not implemented");
   },

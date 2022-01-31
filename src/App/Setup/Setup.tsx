@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { RecoilRoot } from "recoil";
 import DataLoader from "./DataLoader";
+import SettingsLoader from "./SettingsLoader/SettingsLoader";
 import StateLoader from "./StateLoader";
 import LanguageOptions from "./LanguageOptions";
 import Game from "../../Game";
@@ -26,13 +27,15 @@ const Setup = () => {
 
   return (
     <RecoilRoot>
-      <DataLoader gameId={sanitizedGameId}>
-        <FirebaseSyncer>
-          <StateLoader>
-            <Game />
-          </StateLoader>
-        </FirebaseSyncer>
-      </DataLoader>
+      <SettingsLoader>
+        <DataLoader gameId={sanitizedGameId}>
+          <FirebaseSyncer>
+            <StateLoader>
+              <Game />
+            </StateLoader>
+          </FirebaseSyncer>
+        </DataLoader>
+      </SettingsLoader>
     </RecoilRoot>
   );
 };

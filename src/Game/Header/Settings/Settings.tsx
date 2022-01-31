@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { MdOutlineAccountCircle } from "react-icons/md";
-import classes from "./Login.module.css";
+import { MdOutlineSettings } from "react-icons/md";
+import classes from "./Settings.module.css";
 import UserDialog from "../../../SettingsDialog";
 
-const Login = () => {
+const Settings = () => {
   const [showing, setShowing] = useState(false);
   const onClose = useCallback(() => {
     setShowing(false);
@@ -26,10 +26,10 @@ const Login = () => {
       role="button"
       onClick={() => setShowing(true)}
     >
-      <MdOutlineAccountCircle />
+      <MdOutlineSettings />
       {portal}
     </div>
   );
 };
 
-export default Login;
+export default Settings;
