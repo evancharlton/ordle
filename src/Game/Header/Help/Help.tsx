@@ -39,7 +39,7 @@ const Help = () => {
             </a>
             . Det er bare for gøy og for å lære norsk.
           </p>
-          <Accordion initial="rules">
+          <Accordion initial="rules" mode="single">
             <Segment id="rules" title="Reglene">
               <div className={classes.section}>
                 Hver omgang har et hemmelig ord som består av fem bokstaver. Du

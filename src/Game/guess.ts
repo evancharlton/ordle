@@ -1,10 +1,17 @@
-import { atom, useRecoilState } from "recoil";
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { useDictionary } from "../App/Setup/DataLoader";
 import { useStorageKey } from "../App/Setup/StateLoader";
 import { useError } from "../ErrorMessage";
 import { useAlphabet } from "./Keyboard";
 import { useEndState } from "./control";
 import { NewGuess } from "../custom-events";
+import { useCallback } from "react";
+import { useParams } from "react-router";
 
 export type GuessMap = Record<string, number>;
 
@@ -108,4 +115,19 @@ export const useGuess = () => {
     },
     clear: () => setGuessV(""),
   };
+};
+
+const settings = atom({
+  key: "game-settings",
+  default: {
+    strict: false,
+  },
+});
+
+export const useSettings = () => {
+  return useRecoilValue(settings);
+};
+
+export const useUpdateSettings = () => {
+  return useSetRecoilState(settings);
 };

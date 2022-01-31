@@ -11,6 +11,7 @@
   --unknown-color: #999a;
   --link-color: #0aacf2;
   --dictionary-color: #999a;
+  --secondary-text: #999a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,6 +21,7 @@
     --background-color: #000;
     --hover-color: #222;
     --end-background-color: rgb(0, 0, 0, 0.5);
+    --secondary-text: #999;
   }
 }
 

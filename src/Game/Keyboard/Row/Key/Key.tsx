@@ -5,9 +5,10 @@ import classes from "./Key.module.css";
 
 type Props = {
   letter: string;
+  enabled: boolean
 };
 
-const Key = ({ letter }: Props) => {
+const Key = ({ letter, enabled }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const { add } = useGuess();
 
@@ -15,6 +16,10 @@ const Key = ({ letter }: Props) => {
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (!enabled) {
+        return;
+      }
+
       if (e.ctrlKey || e.metaKey) {
         return;
       }
@@ -26,13 +31,17 @@ const Key = ({ letter }: Props) => {
       add(letter);
       ref.current?.focus();
     },
-    [add, letter]
+    [add, letter, enabled]
   );
 
   const onClick = useCallback(() => {
+    if (!enabled) {
+      return;
+    }
+
     add(letter);
     navigator.vibrate(10);
-  }, [add, letter]);
+  }, [add, letter, enabled]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
@@ -45,10 +54,10 @@ const Key = ({ letter }: Props) => {
     <div
       className={[
         classes.letter,
-        state === "yes" && classes.yes,
-        state === "maybe" && classes.maybe,
-        state === "no" && classes.no,
-        state === "unknown" && classes.unknown,
+        enabled && state === "yes" && classes.yes,
+        enabled && state === "maybe" && classes.maybe,
+        enabled && state === "no" && classes.no,
+        enabled && state === "unknown" && classes.unknown,
       ]
         .filter(Boolean)
         .join(" ")}
