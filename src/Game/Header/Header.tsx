@@ -1,5 +1,5 @@
 import Help from "./Help";
-import Random from "./Random";
+import Random from "../../Random";
 import Title from "./Title";
 import Language from "./Language";
 import Settings from "./Settings";
