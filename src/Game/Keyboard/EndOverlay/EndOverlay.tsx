@@ -1,6 +1,8 @@
 import { useWord } from "../../../App/Setup/DataLoader";
-import { useEndState, useNewGame } from "../../control";
+import Random from "../../../Random";
+import { useEndState } from "../../control";
 import classes from "./EndOverlay.module.css";
+import ShareButton from "./ShareButton";
 
 const Word = ({ word }: { word: string }) => (
   <h2>
@@ -22,7 +24,6 @@ const EMOJIS = {
 const EndOverlay = () => {
   const state = useEndState();
   const word = useWord();
-  const newGame = useNewGame();
 
   if (!state) {
     return null;
@@ -40,9 +41,10 @@ const EndOverlay = () => {
       </div>
       <div className={classes.column}>
         <Word word={word} />
-        <button onClick={newGame} className={classes.newGame}>
-          Nytt spill
-        </button>
+        <div className={classes.actions}>
+          <Random />
+          <ShareButton />
+        </div>
       </div>
     </div>
   );

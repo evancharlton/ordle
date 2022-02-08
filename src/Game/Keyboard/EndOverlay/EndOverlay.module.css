@@ -40,3 +40,18 @@
 
   height: 100%;
 }
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.actions > * {
+  padding: 4px 8px;
+}
+
+.actions > :nth-child(2) {
+  border-left: 1px solid #999a;
+}
