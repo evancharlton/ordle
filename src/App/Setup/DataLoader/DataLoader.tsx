@@ -12,7 +12,9 @@ type Props = {
 };
 
 const hashCode = (str: string) => {
-  return str.split("").reduceRight((acc, c) => acc + c.charCodeAt(0) * 31, 0);
+  return str
+    .split("")
+    .reduceRight((acc, c, i) => acc + c.charCodeAt(0) * Math.pow(31, i), 0);
 };
 
 const DataLoader = ({ gameId, children }: Props) => {
