@@ -8,7 +8,7 @@ const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
   const updateSettings = useUpdateSettings();
 
   return (
-    <Segment {...props} title="Valger">
+    <Segment {...props} title="Valg">
       <div className={classes.row}>
         <div className={classes.info}>
           <label className={classes.toggleLabel} htmlFor="strict-mode">
