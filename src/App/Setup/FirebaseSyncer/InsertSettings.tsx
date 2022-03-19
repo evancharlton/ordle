@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import firebase from "../../../sync";
 import { useCallback, useEffect } from "react";
 import { useUpdateSettings } from "../../../Game";
 
