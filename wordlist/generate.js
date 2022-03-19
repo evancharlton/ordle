@@ -2,6 +2,14 @@ const fs = require("fs");
 const readline = require("readline");
 const path = require("path");
 
+const removedWords = (() => {
+  if (process.env.REMOVED_WORDS) {
+    const wordsArray = require(process.env.REMOVED_WORDS);
+    return wordsArray.reduce((acc, word) => ({ ...acc, [word]: true }), {});
+  }
+  return {};
+})();
+
 const languages = [
   [
     path.join("20191010_norsk_ordbank_nno_2012", "fullformer_2012.txt"),
@@ -24,7 +32,6 @@ const scatterSort = (a, b) => {
 const alphabet = new Set("abcdefghijklmnopqrstuvwxyzæøå".split(""));
 
 const promises = languages.map(async ([input, output]) => {
-  let filtered = 0;
   const promise = new Promise((resolve, reject) => {
     const readInterface = readline.createInterface({
       input: fs.createReadStream(path.join(__dirname, input), {
@@ -79,7 +86,12 @@ const promises = languages.map(async ([input, output]) => {
         fs.mkdirSync(outdir);
       }
 
-      const arr = [...words].sort(scatterSort);
+      const arr = [...words].sort(scatterSort).map((word) => {
+        if (removedWords[word]) {
+          return "";
+        }
+        return word;
+      });
       fs.writeFileSync(
         path.join(outdir, "words.json"),
         JSON.stringify(arr, null, 2)
