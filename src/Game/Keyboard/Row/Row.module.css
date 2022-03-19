@@ -31,6 +31,10 @@
     border-left-width: 0px;
   }
 
+  .actionKey {
+    flex: 2;
+  }
+
   .row:first-child > div {
     border-bottom: 0;
   }
