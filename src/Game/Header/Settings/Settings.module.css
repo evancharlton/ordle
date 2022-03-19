@@ -9,3 +9,8 @@
   cursor: pointer;
   transition: all 0.2s;
 }
+
+.icon:hover,
+.icon:focus {
+  color: white;
+}
