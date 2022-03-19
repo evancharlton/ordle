@@ -4,6 +4,7 @@ import Guess from "./Guess";
 import Remaining from "./Remaining";
 import classes from "./Grid.module.css";
 import { useGuesses } from "..";
+import ErrorMessage from "../../ErrorMessage";
 
 type Props = {} & Pick<
   React.HTMLAttributes<HTMLDivElement>,
@@ -32,6 +33,7 @@ export const Grid = (props: Props) => {
       className={[props.className, classes.grid].filter(Boolean).join(" ")}
     >
       {grid}
+      <ErrorMessage />
     </div>
   );
 };
