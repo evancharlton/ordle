@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
@@ -22,6 +22,7 @@ const DataLoader = ({ gameId, children }: Props) => {
   const [words, setWords] = useState<string[]>([]);
   const [gameNumber, setGameNumber] = useState(-1);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let unmounted = false;
@@ -46,15 +47,36 @@ const DataLoader = ({ gameId, children }: Props) => {
       return;
     }
 
+    if (!words.length) {
+      return;
+    }
+
     let number = +gameId;
     if (Number.isNaN(number)) {
       number = hashCode(gameId);
     }
 
     const max = words.length;
+    // JS supports negative mods, so ensure that we're always positive.
+    let gameNumber = ((number % max) + max) % max;
 
-    setGameNumber(((number % max) + max) % max);
-  }, [words, gameId, setGameNumber]);
+    const potentialWord = words[gameNumber];
+    if (potentialWord) {
+      setGameNumber(gameNumber);
+    } else {
+      // This word has been removed; go to another random index that has a word.
+
+      let safety = 5;
+      do {
+        gameNumber = Math.ceil(Math.random() * words.length);
+        if (words[gameNumber]) {
+          navigate(`/${lang}/${gameNumber}`, { replace: true });
+          return;
+        }
+      } while (--safety > 0);
+      navigate(`/${lang}`, { replace: true });
+    }
+  }, [words, gameId, setGameNumber, navigate, lang]);
 
   if (error) {
     return (
