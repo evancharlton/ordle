@@ -10,8 +10,6 @@ import { useError } from "../ErrorMessage";
 import { useAlphabet } from "./Keyboard";
 import { useEndState } from "./control";
 import { NewGuess } from "../custom-events";
-import { useCallback } from "react";
-import { useParams } from "react-router";
 
 export type GuessMap = Record<string, number>;
 
