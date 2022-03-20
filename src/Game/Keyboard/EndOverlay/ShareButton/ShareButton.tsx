@@ -64,13 +64,10 @@ const ShareButton = () => {
   const { lang } = useParams();
 
   const url = [
-    `${window.location.protocol}//`,
-    window.location.host,
-    window.location.pathname,
+    window.location.origin,
+    window.location.pathname.replace(/\/$/, ""),
     `/#/${lang}/${gameNumber}`,
-  ]
-    .join("")
-    .replace(/([^:])\/\//g, "$1/");
+  ].join("");
 
   const text = [
     `Ordle #${gameNumber}`,
