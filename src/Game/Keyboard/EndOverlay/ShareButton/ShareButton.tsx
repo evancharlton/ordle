@@ -67,8 +67,11 @@ const ShareButton = () => {
     `${window.location.protocol}//`,
     window.location.host,
     window.location.pathname,
-    `#/${lang}/${gameNumber}`,
-  ].join("");
+    `/#/${lang}/${gameNumber}`,
+  ]
+    .join("")
+    .replace(/([^:])\/\//g, "$1/");
+  console.log(url);
   const text = [
     `Ordle #${gameNumber}`,
     ``,
