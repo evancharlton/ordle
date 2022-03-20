@@ -71,7 +71,7 @@ const ShareButton = () => {
   ]
     .join("")
     .replace(/([^:])\/\//g, "$1/");
-  console.log(url);
+
   const text = [
     `Ordle #${gameNumber}`,
     ``,
