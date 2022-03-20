@@ -63,7 +63,12 @@ const ShareButton = () => {
   const gameNumber = useGameNumber();
   const { lang } = useParams();
 
-  const url = `${window.location.protocol}//${window.location.host}/#/${lang}/${gameNumber}`;
+  const url = [
+    `${window.location.protocol}//`,
+    window.location.host,
+    window.location.pathname,
+    `#/${lang}/${gameNumber}`,
+  ].join("");
   const text = [
     `Ordle #${gameNumber}`,
     ``,
