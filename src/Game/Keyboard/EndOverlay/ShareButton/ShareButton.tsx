@@ -64,7 +64,12 @@ const ShareButton = () => {
   const { lang } = useParams();
 
   const url = `${window.location.protocol}//${window.location.host}/#/${lang}/${gameNumber}`;
-  const text = [`Ordle #${gameNumber}`, ``, emojis].join("\n");
+  const text = [
+    `Ordle #${gameNumber}`,
+    ``,
+    emojis,
+    "", // include this so that the URL gets put on a new line.
+  ].join("\n");
   const payload = useMemo(() => ({ text, url }), [text, url]);
 
   const [shareMode, setShareMode] = useState<"share" | "copy" | null>(() => {
@@ -97,7 +102,7 @@ const ShareButton = () => {
       case "copy": {
         setState("pending");
         navigator.clipboard
-          .writeText([payload.text, "", url].join("\n"))
+          .writeText([payload.text, url].join("\n"))
           .catch(() => setShareMode(null))
           .finally(() => {
             setState("done");
