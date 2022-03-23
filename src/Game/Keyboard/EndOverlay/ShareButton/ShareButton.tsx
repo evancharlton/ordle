@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { useGuesses } from "../../..";
 import { MdOutlineShare, MdContentCopy } from "react-icons/md";
 import { useGameNumber, useWord } from "../../../../App/Setup/DataLoader";
@@ -69,16 +69,10 @@ const ShareButton = () => {
     `/#/${lang}/${gameNumber}`,
   ].join("");
 
-  const text = [
-    `Ordle #${gameNumber}`,
-    ``,
-    emojis,
-    "", // include this so that the URL gets put on a new line.
-  ].join("\n");
-  const payload = useMemo(() => ({ text, url }), [text, url]);
+  const text = [`Ordle #${gameNumber}`, "", emojis, "", url].join("\n");
 
   const [shareMode, setShareMode] = useState<"share" | "copy" | null>(() => {
-    if (!!navigator.share && navigator.canShare(payload)) {
+    if (!!navigator.share && navigator.canShare({ text })) {
       return "share";
     }
 
@@ -96,7 +90,7 @@ const ShareButton = () => {
       case "share": {
         setState("pending");
         navigator
-          .share(payload)
+          .share({ text })
           .catch(() => setShareMode("copy"))
           .finally(() => {
             setState("done");
@@ -107,7 +101,7 @@ const ShareButton = () => {
       case "copy": {
         setState("pending");
         navigator.clipboard
-          .writeText([payload.text, url].join("\n"))
+          .writeText(text)
           .catch(() => setShareMode(null))
           .finally(() => {
             setState("done");
@@ -115,7 +109,7 @@ const ShareButton = () => {
         break;
       }
     }
-  }, [shareMode, payload, url]);
+  }, [shareMode, text]);
 
   if (!shareMode) {
     return null;
