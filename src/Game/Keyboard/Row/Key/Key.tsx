@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef } from "react";
 import { useLetterMap } from "../..";
 import { useGuess } from "../../..";
 import classes from "./Key.module.css";
+import buttonClasses from "../Row.module.css";
 
 type Props = {
   letter: string;
-  enabled: boolean
+  enabled: boolean;
 };
 
 const Key = ({ letter, enabled }: Props) => {
@@ -54,10 +55,10 @@ const Key = ({ letter, enabled }: Props) => {
     <div
       className={[
         classes.letter,
-        enabled && state === "yes" && classes.yes,
-        enabled && state === "maybe" && classes.maybe,
-        enabled && state === "no" && classes.no,
-        enabled && state === "unknown" && classes.unknown,
+        enabled && state === "yes" && buttonClasses.yes,
+        enabled && state === "maybe" && buttonClasses.maybe,
+        enabled && state === "no" && buttonClasses.no,
+        enabled && state === "unknown" && buttonClasses.unknown,
       ]
         .filter(Boolean)
         .join(" ")}
