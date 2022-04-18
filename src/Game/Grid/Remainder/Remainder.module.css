@@ -1,0 +1,8 @@
+.message {
+  padding: 8px;
+  color: #999;
+}
+
+.count {
+  color: var(--letter-color)
+}

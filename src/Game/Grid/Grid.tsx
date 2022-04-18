@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import Input from "./Input";
 import Guess from "./Guess";
+import Remainder from "./Remainder";
 import Remaining from "./Remaining";
 import classes from "./Grid.module.css";
 import { useGuesses } from "..";
@@ -33,6 +34,7 @@ export const Grid = (props: Props) => {
       className={[props.className, classes.grid].filter(Boolean).join(" ")}
     >
       {grid}
+      <Remainder />
       <ErrorMessage />
     </div>
   );

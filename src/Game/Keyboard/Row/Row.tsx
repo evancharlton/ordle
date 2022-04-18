@@ -13,8 +13,8 @@ type Props = {
 
 const Row = ({ row, final }: Props) => {
   const letters = row.split("");
-  const { word } = useGuess();
-  const col = word.length;
+  const { word: currentGuess } = useGuess();
+  const col = currentGuess.length;
   const { [col]: allowedLetters } = useColumns();
 
   const { strict } = useSettings();

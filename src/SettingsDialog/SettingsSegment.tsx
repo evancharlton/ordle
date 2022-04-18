@@ -4,28 +4,53 @@ import { useSettings, useUpdateSettings } from "../Game";
 import classes from "./SettingsSegment.module.css";
 
 const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
-  const { strict } = useSettings();
+  const { strict, showRemaining } = useSettings();
   const updateSettings = useUpdateSettings();
 
   return (
     <Segment {...props} title="Valg">
-      <div className={classes.row}>
-        <div className={classes.info}>
-          <label className={classes.toggleLabel} htmlFor="strict-mode">
-            Streng modus
-          </label>
-          <p>Oppdaget bokstaver må brukes</p>
+      <>
+        <div className={classes.row}>
+          <div className={classes.info}>
+            <label className={classes.toggleLabel} htmlFor="strict-mode">
+              Streng modus
+            </label>
+            <p>Oppdaget bokstaver må brukes</p>
+          </div>
+          <input
+            className={classes.toggle}
+            type="checkbox"
+            id="strict-mode"
+            onChange={() => {
+              updateSettings((old) => ({ ...old, strict: !old.strict }));
+            }}
+            checked={!!strict}
+          />
         </div>
-        <input
-          className={classes.toggle}
-          type="checkbox"
-          id="strict-mode"
-          onChange={() => {
-            updateSettings({ strict: !strict });
-          }}
-          checked={strict}
-        />
-      </div>
+        <div className={classes.row}>
+          <div className={classes.info}>
+            <label className={classes.toggleLabel} htmlFor="strict-mode">
+              Vis antall
+            </label>
+            <p>
+              Vis hvor mange mulige ord som gjenstår (krever{" "}
+              <strong>streng modus</strong>)
+            </p>
+          </div>
+          <input
+            className={classes.toggle}
+            type="checkbox"
+            id="strict-mode"
+            onChange={() => {
+              updateSettings((old) => ({
+                ...old,
+                showRemaining: !old.showRemaining,
+              }));
+            }}
+            checked={!!showRemaining}
+          />
+        </div>
+      </>
     </Segment>
   );
 };
