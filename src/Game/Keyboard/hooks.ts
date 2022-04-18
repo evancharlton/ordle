@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useParams } from "react-router";
 import { useGuesses } from "..";
 import { useWord } from "../../App/Setup/DataLoader";
@@ -34,20 +35,20 @@ export const useLetterMap = (letter: string) => {
   return letterMap[letter] ?? "unknown";
 };
 
-const useForbiddenLetters = (word: string, guesses: string[]) => {
-  const rightLetters = new Set([...word.split("")]);
-  const invalidLetters = new Set();
-
-  for (let i = 0; i < guesses.length; i += 1) {
-    const guess = guesses[i];
-    guess.split("").forEach((letter) => {
-      if (!rightLetters.has(letter)) {
-        invalidLetters.add(letter);
-      }
-    });
-  }
-
-  return invalidLetters;
+export const useForbiddenLetters = (word: string, guesses: string[]) => {
+  return useMemo(() => {
+    const rightLetters = new Set([...word.split("")]);
+    const invalidLetters = new Set();
+    for (let i = 0; i < guesses.length; i += 1) {
+      const guess = guesses[i];
+      guess.split("").forEach((letter) => {
+        if (!rightLetters.has(letter)) {
+          invalidLetters.add(letter);
+        }
+      });
+    }
+    return invalidLetters;
+  }, [guesses, word]);
 };
 
 export const useColumns = () => {
@@ -68,7 +69,7 @@ export const useColumns = () => {
       guessedValues.add(guess[i]);
     });
 
-    const allowed = new Set();
+    const allowed = new Set<string>();
 
     if (guessedValues.has(known)) {
       // They found it already!

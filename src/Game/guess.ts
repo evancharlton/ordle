@@ -119,6 +119,7 @@ const settings = atom({
   key: "game-settings",
   default: {
     strict: false,
+    showRemaining: false,
   },
 });
 
