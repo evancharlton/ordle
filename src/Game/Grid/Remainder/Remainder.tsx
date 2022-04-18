@@ -51,7 +51,7 @@ const Remainder = () => {
 
   return (
     <div className={classes.message}>
-      gjenstår ord: <span className={classes.count}>{format(count)}</span>
+      mulige ord: <span className={classes.count}>{format(count)}</span>
     </div>
   );
 };
