@@ -35,6 +35,11 @@
   transition: background-color ease 0.3s;
 }
 
+.toggle:disabled {
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+
 .toggle:before {
   content: "på av";
   display: block;

@@ -33,21 +33,25 @@ const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
               Vis antall
             </label>
             <p>
-              Vis hvor mange mulige ord som gjenstår (krever{" "}
-              <strong>streng modus</strong>)
+              Vis hvor mange mulige ord som gjenstår
+              <br />
+              <em>
+                (krever <strong>streng modus</strong>)
+              </em>
             </p>
           </div>
           <input
             className={classes.toggle}
             type="checkbox"
             id="strict-mode"
+            disabled={!strict}
             onChange={() => {
               updateSettings((old) => ({
                 ...old,
                 showRemaining: !old.showRemaining,
               }));
             }}
-            checked={!!showRemaining}
+            checked={!!strict && !!showRemaining}
           />
         </div>
       </>
