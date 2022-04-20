@@ -39,7 +39,7 @@ const format = (v: number) => {
     return v;
   }
   const thousands = Math.floor(v / 1000);
-  const hundreds = v % 1000;
+  const hundreds = `000${v % 1000}`.substr(-3);
   return `${thousands}${String.fromCharCode(0xa0)}${hundreds}`;
 };
 
