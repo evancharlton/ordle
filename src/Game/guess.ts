@@ -118,8 +118,8 @@ export const useGuess = () => {
 const settings = atom({
   key: "game-settings",
   default: {
-    strict: false,
-    showRemaining: false,
+    strict: true,
+    showRemaining: true,
   },
 });
 
