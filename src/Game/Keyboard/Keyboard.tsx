@@ -1,7 +1,7 @@
 import Row from "./Row";
 import classes from "./Keyboard.module.css";
 import EndOverlay from "./EndOverlay";
-import { useKeyboard } from "./hooks";
+import { KEYBOARD } from "./hooks";
 import { KeyboardContext, KeyboardContextType } from "./context";
 import { useMemo } from "react";
 import { useGuesses } from "..";
@@ -13,7 +13,7 @@ type Props = {} & Pick<
 >;
 
 export const Keyboard = (props: Props) => {
-  const keyboard = useKeyboard();
+  const keyboard = KEYBOARD;
   const [guessMap] = useGuesses();
   const word = useWord();
 

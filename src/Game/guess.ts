@@ -7,7 +7,7 @@ import {
 import { useDictionary } from "../App/Setup/DataLoader";
 import { useStorageKey } from "../App/Setup/StateLoader";
 import { useError } from "../ErrorMessage";
-import { useAlphabet } from "./Keyboard";
+import { ALPHABET } from "./Keyboard";
 import { useEndState } from "./control";
 import { NewGuess } from "../custom-events";
 
@@ -48,7 +48,6 @@ export const useGuesses = () => {
 export const useGuess = () => {
   const [guessV, setGuessV] = useRecoilState(guess);
   const [guessesV, setGuesses] = useGuesses();
-  const alphabet = useAlphabet();
   const dictionary = useDictionary();
   const { setError } = useError();
   const finished = !!useEndState();
@@ -61,8 +60,8 @@ export const useGuess = () => {
         return;
       }
 
-      const l = letter.toLocaleLowerCase();
-      if (!alphabet.has(l)) {
+      const l = letter.toLocaleLowerCase() as keyof typeof ALPHABET;
+      if (!ALPHABET[l]) {
         return;
       }
 

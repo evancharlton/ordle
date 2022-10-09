@@ -1,34 +1,47 @@
 import { useMemo } from "react";
-import { useParams } from "react-router";
 import { useGuesses } from "..";
 import { useWord } from "../../App/Setup/DataLoader";
 import { useKeyboardContext } from "./context";
 
 type Keyboard = string[];
 
-const KEYBOARDS: Record<string, Keyboard> = {
-  "nb-no": ["qwertyuiopå", "asdfghjkløæ", "zxcvbnm"],
-  "nn-no": ["qwertyuiopå", "asdfghjkløæ", "zxcvbnm"],
-};
+export const KEYBOARD: Readonly<Keyboard> = [
+  "qwertyuiopå",
+  "asdfghjkløæ",
+  "zxcvbnm",
+] as const;
 
-export const useKeyboard = () => {
-  const { lang } = useParams();
-  if (!lang) {
-    throw new Error("No language set yet");
-  }
-
-  const keyboard = KEYBOARDS[lang];
-  if (!keyboard) {
-    throw new Error(`Unknown language: ${lang}`);
-  }
-
-  return keyboard;
-};
-
-export const useAlphabet = () => {
-  const keyboard = useKeyboard();
-  return new Set(keyboard.join("").split(""));
-};
+export const ALPHABET = {
+  a: true,
+  b: true,
+  c: true,
+  d: true,
+  e: true,
+  f: true,
+  g: true,
+  h: true,
+  i: true,
+  j: true,
+  k: true,
+  l: true,
+  m: true,
+  n: true,
+  o: true,
+  p: true,
+  q: true,
+  r: true,
+  s: true,
+  t: true,
+  u: true,
+  v: true,
+  w: true,
+  x: true,
+  y: true,
+  z: true,
+  æ: true,
+  ø: true,
+  å: true,
+} as const;
 
 export const useLetterMap = (letter: string) => {
   const { letterMap } = useKeyboardContext();
@@ -53,9 +66,7 @@ export const useForbiddenLetters = (word: string, guesses: string[]) => {
 
 export const useColumns = () => {
   const word = useWord();
-  const keyboard = useKeyboard();
-  const alphabet = keyboard
-    .join("")
+  const alphabet = KEYBOARD.join("")
     .split("")
     .sort((a, b) => a.localeCompare(b));
   const [guessMap] = useGuesses();
