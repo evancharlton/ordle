@@ -5,6 +5,7 @@ import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
 import Loading from "../../../Loading";
+import { store } from "../../../storage";
 
 type Props = {
   gameId: string;
@@ -21,26 +22,29 @@ const DataLoader = ({ gameId, children }: Props) => {
   const { lang } = useParams();
   const [words, setWords] = useState<string[]>([]);
   const [gameNumber, setGameNumber] = useState(-1);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
+  const url = [process.env.PUBLIC_URL, lang ?? "", "words.json"].join("/");
 
   useEffect(() => {
-    let unmounted = false;
+    store.getItem<string[]>(url).then(async (cachedValue) => {
+      if (cachedValue) {
+        setWords(cachedValue);
+      }
 
-    fetch([process.env.PUBLIC_URL, lang ?? "", "words.json"].join("/"))
-      .then((resp) => resp.json())
-      .then((words) => {
-        if (unmounted) {
-          return;
+      if (window.navigator.onLine) {
+        try {
+          const fetchedValue = await fetch(url).then((resp) => resp.json());
+          setWords(fetchedValue);
+          await store.setItem(url, fetchedValue);
+        } catch (e) {
+          if (e instanceof Error) {
+            setError(e);
+          }
         }
-        setWords(words);
-      })
-      .catch((e) => setError(e));
-
-    return () => {
-      unmounted = true;
-    };
-  }, [lang, setWords]);
+      }
+    });
+  }, [lang, setWords, url]);
 
   useEffect(() => {
     if (gameId === undefined) {
