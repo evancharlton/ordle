@@ -19,7 +19,7 @@ const SettingsDialog = ({ onClose }: Props) => {
           <UserSegment id="login" />
         </Accordion>
         <div className={classes.version}>
-          versjon<code>{process.env.REACT_APP_VERSION ?? "development"}</code>
+          versjon<code>{process.env.REACT_APP_RELEASE ?? "development"}</code>
         </div>
       </Dialog>
     );
