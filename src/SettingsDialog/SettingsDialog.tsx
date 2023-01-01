@@ -4,6 +4,7 @@ import Dialog from "../Dialog";
 import Accordion from "../Accordion";
 import UserSegment from "./UserSegment";
 import SettingsSegment from "./SettingsSegment";
+import classes from "./SettingsDialog.module.css";
 
 type Props = {
   onClose: () => void;
@@ -17,6 +18,9 @@ const SettingsDialog = ({ onClose }: Props) => {
           <SettingsSegment id="settings" />
           <UserSegment id="login" />
         </Accordion>
+        <div className={classes.version}>
+          versjon<code>{process.env.REACT_APP_VERSION ?? "development"}</code>
+        </div>
       </Dialog>
     );
   }, [onClose]);
