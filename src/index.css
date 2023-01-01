@@ -1,5 +1,6 @@
 :root {
   --letter-color: #000;
+  --letter-color-rgb: 0, 0, 0;
   --letter-border: #000a;
   --background-color: #fff;
   --hover-color: #eee;
@@ -17,6 +18,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --letter-color: #fff;
+    --letter-color-rgb: 255, 255, 255;
     --letter-border: #fff6;
     --background-color: #000;
     --hover-color: #222;

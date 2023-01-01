@@ -57,7 +57,7 @@ const Key = ({ letter, enabled }: Props) => {
         classes.letter,
         enabled && state === "yes" && buttonClasses.yes,
         enabled && state === "maybe" && buttonClasses.maybe,
-        enabled && state === "no" && buttonClasses.no,
+        state === "no" && buttonClasses.no,
         enabled && state === "unknown" && buttonClasses.unknown,
       ]
         .filter(Boolean)

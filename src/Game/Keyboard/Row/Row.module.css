@@ -33,6 +33,8 @@
 
 .no {
   background-color: var(--no-color);
+  color: rgba(var(--letter-color-rgb), 0.33);
+  border-color: transparent;
 }
 
 .unknown {
