@@ -1,0 +1,1 @@
+export { getLegality } from "./logic";

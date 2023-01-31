@@ -1,14 +1,16 @@
 import classes from "./Guess.module.css";
 import { useMemo } from "react";
 import Letter from "../Letter";
-import { useWord } from "../../../App/Setup/DataLoader";
+import { useWord } from "../../../App/Setup/GameLoader";
 import { MdOpenInNew } from "react-icons/md";
 
 type Props = {
   guess: string;
+  Icon?: typeof MdOpenInNew;
+  onClick?: () => void;
 };
 
-const Guess = ({ guess }: Props) => {
+const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
   const word = useWord();
 
   const letters = useMemo(() => {
@@ -22,7 +24,7 @@ const Guess = ({ guess }: Props) => {
       );
 
     // Find everything that's correct.
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < word.length; i += 1) {
       if (guess[i] !== word[i]) {
         continue;
       }
@@ -56,19 +58,35 @@ const Guess = ({ guess }: Props) => {
     return out;
   }, [word, guess]);
 
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    if (onClick) {
+      return (
+        <div className={classes.guess} onClick={onClick}>
+          {children}
+        </div>
+      );
+    }
+    return (
+      <a
+        href={`https://naob.no/søk/${guess}`}
+        target="_blank"
+        rel="noreferrer noopener"
+        className={classes.guess}
+        onClick={onClick}
+      >
+        {children}
+      </a>
+    );
+  };
+
   return (
-    <a
-      href={`https://naob.no/søk/${guess}`}
-      target="_blank"
-      rel="noreferrer noopener"
-      className={classes.guess}
-    >
+    <Wrapper>
       <div className={classes.spacer}></div>
       {letters}
       <div className={classes.spacer}>
-        <MdOpenInNew />
+        <Icon />
       </div>
-    </a>
+    </Wrapper>
   );
 };
 

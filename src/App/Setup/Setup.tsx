@@ -1,18 +1,11 @@
 import { useParams } from "react-router";
-import { RecoilRoot } from "recoil";
-import DataLoader from "./DataLoader";
-import SettingsLoader from "./SettingsLoader/SettingsLoader";
+import GameLoader from "./GameLoader";
 import StateLoader from "./StateLoader";
-import LanguageOptions from "./LanguageOptions";
 import Game from "../../Game";
 import FirebaseSyncer from "./FirebaseSyncer";
 
 const Setup = () => {
-  const { lang, gameId } = useParams();
-
-  if (!lang) {
-    return <LanguageOptions />;
-  }
+  const { gameId } = useParams();
 
   let sanitizedGameId = gameId ?? "";
   if (!gameId) {
@@ -26,17 +19,13 @@ const Setup = () => {
   }
 
   return (
-    <RecoilRoot>
-      <SettingsLoader>
-        <DataLoader gameId={sanitizedGameId}>
-          <FirebaseSyncer>
-            <StateLoader>
-              <Game />
-            </StateLoader>
-          </FirebaseSyncer>
-        </DataLoader>
-      </SettingsLoader>
-    </RecoilRoot>
+    <GameLoader gameId={sanitizedGameId}>
+      <FirebaseSyncer>
+        <StateLoader>
+          <Game />
+        </StateLoader>
+      </FirebaseSyncer>
+    </GameLoader>
   );
 };
 

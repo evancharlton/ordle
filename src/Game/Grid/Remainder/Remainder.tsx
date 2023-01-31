@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import { useWord, useWords } from "../../../App/Setup/DataLoader";
-import { useSettings } from "../../guess";
-import { useColumns } from "../../Keyboard";
+import { useWords } from "../../../App/Setup/DataLoader";
+import { useWord } from "../../../App/Setup/GameLoader";
+import { getLegality } from "../../../utils";
+import { useGuesses, useSettings } from "../../guess";
 import classes from "./Remainder.module.css";
 
 const usePossibilities = () => {
@@ -9,29 +10,19 @@ const usePossibilities = () => {
 
   const words = useWords();
   const word = useWord();
-
-  const columns = useColumns();
-
+  const [guesses] = useGuesses();
   return useMemo(() => {
     if (!(strict && showRemaining)) {
-      return 0;
+      return [];
     }
 
-    const regex = (() => {
-      const groups = word
-        .split("")
-        .map((_, i) => {
-          const column = columns[i];
-          const out: string[] = [];
-          column.forEach((val) => out.push(val));
-          return `[${out.join("")}]`;
-        })
-        .join("");
-      return new RegExp(`^${groups}$`);
-    })();
-
-    return words.filter((w) => regex.test(w)).length;
-  }, [columns, showRemaining, strict, word, words]);
+    let filtered = [...words];
+    Object.keys(guesses).forEach((guess) => {
+      const test = getLegality(word, guess);
+      filtered = filtered.filter((w) => test(w) === "yes");
+    });
+    return filtered;
+  }, [guesses, showRemaining, strict, word, words]);
 };
 
 const format = (v: number) => {
@@ -44,14 +35,15 @@ const format = (v: number) => {
 };
 
 const Remainder = () => {
-  const count = usePossibilities();
-  if (!count) {
+  const remainders = usePossibilities();
+  if (!remainders || remainders.length === 0) {
     return null;
   }
 
   return (
     <div className={classes.message}>
-      mulige ord: <span className={classes.count}>{format(count)}</span>
+      mulige ord:{" "}
+      <span className={classes.count}>{format(remainders.length)}</span>
     </div>
   );
 };

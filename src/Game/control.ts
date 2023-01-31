@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useWord, useWords } from "../App/Setup/DataLoader";
+import { useWords } from "../App/Setup/DataLoader";
 import { useGuess, useGuesses } from ".";
+import { useWord } from "../App/Setup/GameLoader";
 
 export const useEndState = () => {
   const [guesses] = useGuesses();

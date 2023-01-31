@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useWord } from "../DataLoader";
+import { useWord } from "../GameLoader";
 
 export const useLanguageKey = () => {
   const { lang } = useParams();

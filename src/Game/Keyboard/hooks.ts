@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useGuesses } from "..";
-import { useWord } from "../../App/Setup/DataLoader";
+import { useWord } from "../../App/Setup/GameLoader";
 import { useKeyboardContext } from "./context";
 
 type Keyboard = string[];
@@ -11,7 +11,7 @@ export const KEYBOARD: Readonly<Keyboard> = [
   "zxcvbnm",
 ] as const;
 
-export const ALPHABET = {
+export const ALPHABET: Record<string, true> = {
   a: true,
   b: true,
   c: true,

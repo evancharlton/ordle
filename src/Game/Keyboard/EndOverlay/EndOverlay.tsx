@@ -1,4 +1,4 @@
-import { useWord } from "../../../App/Setup/DataLoader";
+import { useWord } from "../../../App/Setup/GameLoader";
 import Random from "../../../Random";
 import { useEndState } from "../../control";
 import classes from "./EndOverlay.module.css";

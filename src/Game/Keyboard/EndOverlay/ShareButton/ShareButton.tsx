@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useGuesses } from "../../..";
 import { MdOutlineShare, MdContentCopy } from "react-icons/md";
-import { useGameNumber, useWord } from "../../../../App/Setup/DataLoader";
+import { useGameNumber, useWord } from "../../../../App/Setup/GameLoader";
 import classes from "./ShareButton.module.css";
 import { useParams } from "react-router";
 

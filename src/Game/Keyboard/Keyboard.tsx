@@ -5,7 +5,7 @@ import { KEYBOARD } from "./hooks";
 import { KeyboardContext, KeyboardContextType } from "./context";
 import { useMemo } from "react";
 import { useGuesses } from "..";
-import { useWord } from "../../App/Setup/DataLoader";
+import { useWord } from "../../App/Setup/GameLoader";
 
 type Props = {} & Pick<
   React.HTMLAttributes<HTMLDivElement>,
