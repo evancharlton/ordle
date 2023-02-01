@@ -44,14 +44,13 @@ const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
             className={classes.toggle}
             type="checkbox"
             id="strict-mode"
-            disabled={!strict}
             onChange={() => {
               updateSettings((old) => ({
                 ...old,
                 showRemaining: !old.showRemaining,
               }));
             }}
-            checked={!!strict && !!showRemaining}
+            checked={!!showRemaining}
           />
         </div>
       </>

@@ -6,13 +6,13 @@ import { useGuesses, useSettings } from "../../guess";
 import classes from "./Remainder.module.css";
 
 const usePossibilities = () => {
-  const { strict, showRemaining } = useSettings();
+  const { showRemaining } = useSettings();
 
   const words = useWords();
   const word = useWord();
   const [guesses] = useGuesses();
   return useMemo(() => {
-    if (!(strict && showRemaining)) {
+    if (!showRemaining) {
       return [];
     }
 
@@ -22,7 +22,7 @@ const usePossibilities = () => {
       filtered = filtered.filter((w) => test(w) === "yes");
     });
     return filtered;
-  }, [guesses, showRemaining, strict, word, words]);
+  }, [guesses, showRemaining, word, words]);
 };
 
 const format = (v: number) => {
