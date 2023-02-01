@@ -7,11 +7,11 @@ import {
 } from "react-icons/md";
 import Guess from "../../../Game/Grid/Guess";
 import { ALPHABET } from "../../../Game/Keyboard";
-import { getLegality } from "../../../utils";
-import { useDictionary, useWords } from "../../Setup/DataLoader";
-import { Context, useWord } from "../../Setup/GameLoader";
+import { useDictionary } from "../../Setup/DataLoader";
+import { Context } from "../../Setup/GameLoader";
 import { reducer } from "./reducer";
 import classes from "./Builder.module.css";
+import { usePossibilities } from "../../../Game/Grid/Remainder";
 
 const Blank: typeof MdRemoveCircleOutline = () => <></>;
 
@@ -146,21 +146,9 @@ export const Builder = () => {
   );
 };
 
-const usePossibilities = (guesses: string[]) => {
-  const words = useWords();
-  const word = useWord();
-  return useMemo(() => {
-    let filtered = [...words].filter(Boolean).sort();
-    guesses.forEach((guess) => {
-      const testLegality = getLegality(word, guess);
-      filtered = filtered.filter((w) => testLegality(w) === "yes");
-    });
-    return filtered;
-  }, [guesses, word, words]);
-};
-
 const Remainder = ({ guesses }: { guesses: string[] }) => {
-  const possibilities = usePossibilities(guesses);
+  const { remainders: possibilities, formattedCount } =
+    usePossibilities(guesses);
 
   const list = useMemo(() => {
     if (possibilities.length > 3000) {
@@ -181,7 +169,7 @@ const Remainder = ({ guesses }: { guesses: string[] }) => {
 
   return (
     <div className={classes.words}>
-      <h2>{possibilities.length} mulige</h2>
+      <h2>{formattedCount} mulige</h2>
       {list}
     </div>
   );
