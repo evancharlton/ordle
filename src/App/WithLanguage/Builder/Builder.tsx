@@ -163,7 +163,7 @@ const Remainder = ({ guesses }: { guesses: string[] }) => {
   const possibilities = usePossibilities(guesses);
 
   const list = useMemo(() => {
-    if (possibilities.length > 1000) {
+    if (possibilities.length > 3000) {
       return (
         <div style={{ textAlign: "center" }}>
           <em>(masse ord)</em>
