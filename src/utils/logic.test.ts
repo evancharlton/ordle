@@ -15,6 +15,12 @@ describe("logic", () => {
       const t = getLegality("eksil", "issen");
       expect(t("eksil")).toBe("yes");
     });
+
+    test("hente(hente)", () => {
+      const t = getLegality("hente", "hente");
+      expect(t("hente")).toBe("yes");
+      expect(t("henta")).toBe("missing-known-yes");
+    });
   });
 
   describe("getScores", () => {
@@ -26,34 +32,34 @@ describe("logic", () => {
 
     test("green", () => {
       expect(getScores("abcde", "afghi")).toMatchObject({
-        yes: { a: true },
+        yes: { a: 1 },
         no: { f: true, g: true, h: true, i: true },
       });
       expect(getScores("abcde", "abcde")).toMatchObject({
-        yes: { a: true, b: true, c: true, d: true, e: true },
+        yes: { a: 1, b: 1, c: 1, d: 1, e: 1 },
       });
     });
 
     test("maybe", () => {
       expect(getScores("abcde", "edbac")).toMatchObject({
-        maybe: { a: true, b: true, c: true, d: true, e: true },
+        maybe: { a: 1, b: 1, c: 1, d: 1, e: 1 },
       });
 
       expect(getScores("abcde", "bcdaa")).toMatchObject({
-        maybe: { a: true, b: true, c: true, d: true },
+        maybe: { a: 1, b: 1, c: 1, d: 1 },
         no: { a: true },
       });
 
       expect(getScores("abcde", "abcda")).toMatchObject({
-        yes: { a: true, b: true, c: true, d: true },
+        yes: { a: 1, b: 1, c: 1, d: 1 },
         no: { a: true },
       });
     });
 
     test("multiple", () => {
       expect(getScores("abcde", "abfed")).toMatchObject({
-        yes: { a: true, b: true },
-        maybe: { d: true, e: true },
+        yes: { a: 1, b: 1 },
+        maybe: { d: 1, e: 1 },
         illegal: { 4: "d", 3: "e" },
         no: { f: true },
       });
@@ -61,10 +67,19 @@ describe("logic", () => {
 
     test("eksil + issen", () => {
       expect(getScores("eksil", "issen")).toMatchObject({
-        yes: { s: true },
-        maybe: { e: true, i: true },
+        yes: { s: 1 },
+        maybe: { e: 1, i: 1 },
         no: { s: true, n: true },
         illegal: ["i", undefined, undefined, "e", undefined],
+      });
+    });
+
+    test("hente + hente", () => {
+      expect(getScores("hente", "hente")).toEqual({
+        yes: { h: 1, e: 2, n: 1, t: 1 },
+        maybe: {},
+        no: {},
+        illegal: [undefined, undefined, undefined, undefined, undefined],
       });
     });
   });

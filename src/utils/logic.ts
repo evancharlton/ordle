@@ -15,21 +15,24 @@ export const getLegality = (solution: string, guess: string) => {
     const { yes, maybe, no } = out;
 
     // Make sure that every "yes" we knew about is still present.
-    for (const letter of knownYes) {
-      if (!yes[letter]) {
-        return "missing-known-yes";
+    for (let i = 0; i < solution.length; i += 1) {
+      if (solution[i] === guess[i]) {
+        // This was previously discovered; ensure that it's still true.
+        if (candidate[i] !== solution[i]) {
+          return "missing-known-yes";
+        }
+        yes[solution[i]] -= 1;
       }
-      yes[letter] = false;
     }
 
     // Make sure that every "maybe" we knew about is also still present (or has been promoted).
     for (const letter of knownMaybe) {
       if (yes[letter]) {
-        yes[letter] = false;
+        yes[letter] -= 1;
         continue;
       }
       if (maybe[letter]) {
-        maybe[letter] = false;
+        maybe[letter] -= 1;
         continue;
       }
 
@@ -53,8 +56,8 @@ export const getLegality = (solution: string, guess: string) => {
 };
 
 type Scores = {
-  yes: Record<string, boolean>;
-  maybe: Record<string, boolean>;
+  yes: Record<string, number>;
+  maybe: Record<string, number>;
   no: Record<string, boolean>;
   illegal: [
     string | undefined,
@@ -85,7 +88,7 @@ export const getScores = (word: string, guess: string): Scores => {
   const skips = new Array(5).fill(false);
   for (let i = 0; i < word.length; i += 1) {
     if (word[i] === guess[i]) {
-      scores.yes[word[i]] = true;
+      scores.yes[word[i]] = (scores.yes[word[i]] ?? 0) + 1;
       counts[guess[i]] -= 1;
       skips[i] = true;
     }
@@ -97,7 +100,7 @@ export const getScores = (word: string, guess: string): Scores => {
     }
 
     if ((counts[guess[i]] ?? 0) > 0) {
-      scores.maybe[guess[i]] = true;
+      scores.maybe[guess[i]] = (scores.maybe[guess[i]] ?? 0) + 1;
       scores.illegal[i] = guess[i];
       counts[guess[i]] -= 1;
     } else {
