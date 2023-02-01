@@ -6,7 +6,6 @@ type Possibility =
   | "includes-same-maybe";
 export const getLegality = (solution: string, guess: string) => {
   const { illegal, ...known } = getScores(solution, guess);
-  const knownYes = Object.keys(known.yes);
   const knownMaybe = Object.keys(known.maybe);
   const knownNo = Object.keys(known.no);
 
