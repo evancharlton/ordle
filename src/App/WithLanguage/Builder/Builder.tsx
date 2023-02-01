@@ -160,7 +160,7 @@ const Remainder = ({ guesses }: { guesses: string[] }) => {
     }
     return (
       <ul>
-        {possibilities.map((word) => (
+        {possibilities.sort().map((word) => (
           <li key={word}>{word}</li>
         ))}
       </ul>
