@@ -4,7 +4,6 @@ type State = {
   guess: string;
   guesses: string[];
   valid: boolean;
-  words: Record<string, true>;
   error: string;
 };
 
@@ -65,28 +64,17 @@ export const reducer = (state: State, action: Action): State => {
       }
 
       if (state.mode === "solution") {
-        if (!state.words[state.solution]) {
-          return {
-            ...state,
-            error: `Ukjent ord: ${state.solution}`,
-          };
-        }
-
         return {
           ...state,
           mode: "guess",
         };
       } else if (state.mode === "guess") {
-        if (!state.words[state.guess]) {
-          return {
-            ...state,
-            error: `Ukjent ord: ${state.guess}`,
-          };
-        }
-
         return {
           ...state,
-          guesses: [...state.guesses, state.guess],
+          guesses: [
+            ...state.guesses.filter((g) => g !== state.guess),
+            state.guess,
+          ],
           guess: "",
           valid: false,
         };

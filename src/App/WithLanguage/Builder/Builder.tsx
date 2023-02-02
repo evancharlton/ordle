@@ -7,7 +7,6 @@ import {
 } from "react-icons/md";
 import Guess from "../../../Game/Grid/Guess";
 import { ALPHABET } from "../../../Game/Keyboard";
-import { useDictionary } from "../../Setup/DataLoader";
 import { Context } from "../../Setup/GameLoader";
 import { reducer } from "./reducer";
 import classes from "./Builder.module.css";
@@ -16,15 +15,12 @@ import { usePossibilities } from "../../../Game/Grid/Remainder";
 const Blank: typeof MdRemoveCircleOutline = () => <></>;
 
 export const Builder = () => {
-  const words = useDictionary();
-
   const [state, dispatch] = useReducer(reducer, {
     mode: "solution",
     solution: "",
     guess: "",
     guesses: [],
     valid: false,
-    words,
     error: "",
   });
   const { solution, guesses, guess, error, mode, valid } = state;
