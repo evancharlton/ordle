@@ -1,5 +1,6 @@
 import {
   atom,
+  selector,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
@@ -10,6 +11,8 @@ import { useError } from "../ErrorMessage";
 import { ALPHABET } from "./Keyboard";
 import { useEndState } from "./control";
 import { NewGuess } from "../custom-events";
+import { getLegality, never } from "../utils";
+import { useWord } from "../App/Setup/GameLoader";
 
 export type GuessMap = Record<string, number>;
 
@@ -36,6 +39,28 @@ const guesses = atom<GuessMap>({
   default: {},
 });
 
+const lastGuess = selector<string>({
+  key: "lastGuess",
+  get: ({ get }) => {
+    const guessesV = get(guesses);
+    if (!guessesV) {
+      return "";
+    }
+
+    const sorted = Object.entries(guessesV).sort(
+      ([_guessA, timeA], [_guessB, timeB]) => {
+        return timeB - timeA;
+      }
+    );
+    if (sorted.length === 0) {
+      return "";
+    }
+
+    const [[guess]] = sorted;
+    return guess;
+  },
+});
+
 const guess = atom({
   key: "guess",
   default: "",
@@ -46,12 +71,15 @@ export const useGuesses = () => {
 };
 
 export const useGuess = () => {
+  const word = useWord();
   const [guessV, setGuessV] = useRecoilState(guess);
   const [guessesV, setGuesses] = useGuesses();
   const dictionary = useDictionary();
   const { setError } = useError();
   const finished = !!useEndState();
   const key = useStorageKey();
+  const { strict } = useSettings();
+  const lastGuessV = useRecoilValue(lastGuess);
 
   return {
     word: guessV,
@@ -95,6 +123,47 @@ export const useGuess = () => {
       if (guessesV[guessV]) {
         setError("Allerede prøvde");
         return;
+      }
+
+      if (strict && guessesV) {
+        const judge = getLegality(word, lastGuessV);
+        const legality = judge(guessV);
+        if (legality !== "legal") {
+          const { reason } = legality;
+          switch (reason) {
+            case "includes-known-no": {
+              setError(
+                `Må bruke ikke "${legality.letter.toLocaleUpperCase()}"`
+              );
+              break;
+            }
+
+            case "includes-same-maybe": {
+              setError(
+                `Må bruke ikke "${legality.letter.toLocaleUpperCase()}" i posisjon ${
+                  legality.column
+                }`
+              );
+              break;
+            }
+
+            case "missing-known-yes": {
+              setError(`Må bruke "${legality.letter.toLocaleUpperCase()}"`);
+              break;
+            }
+
+            case "missing-maybe": {
+              setError(`Må bruke "${legality.letter.toLocaleUpperCase()}"`);
+              break;
+            }
+
+            default: {
+              never(reason);
+            }
+          }
+
+          return;
+        }
       }
 
       setGuesses((g) => {

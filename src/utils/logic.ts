@@ -1,9 +1,14 @@
 type Possibility =
-  | "yes"
-  | "includes-known-no"
-  | "missing-known-yes"
-  | "missing-maybe"
-  | "includes-same-maybe";
+  | "legal"
+  | { reason: "includes-known-no"; letter: string }
+  | { reason: "missing-known-yes"; letter: string }
+  | { reason: "missing-maybe"; letter: string }
+  | {
+      reason: "includes-same-maybe";
+      letter: string;
+      column: number;
+    };
+
 export const getLegality = (solution: string, guess: string) => {
   const { illegal, ...known } = getScores(solution, guess);
   const knownMaybe = Object.keys(known.maybe);
@@ -18,7 +23,7 @@ export const getLegality = (solution: string, guess: string) => {
       if (solution[i] === guess[i]) {
         // This was previously discovered; ensure that it's still true.
         if (candidate[i] !== solution[i]) {
-          return "missing-known-yes";
+          return { reason: "missing-known-yes", letter: solution[i] };
         }
         yes[solution[i]] -= 1;
       }
@@ -35,22 +40,28 @@ export const getLegality = (solution: string, guess: string) => {
         continue;
       }
 
-      return "missing-maybe";
+      return { reason: "missing-maybe", letter };
     }
 
     // Make sure that none of the illegal (previous maybes) are present.
     for (let i = 0; i < candidate.length; i += 1) {
       if (illegal[i] === candidate[i]) {
-        return "includes-same-maybe";
+        return {
+          reason: "includes-same-maybe",
+          letter: candidate[i],
+          column: i,
+        };
       }
     }
 
     // Make sure that no "no" we knew about is in the candidate.
-    if (knownNo.some((letter) => yes[letter] || maybe[letter] || no[letter])) {
-      return "includes-known-no";
+    for (const letter of knownNo) {
+      if (yes[letter] || maybe[letter] || no[letter]) {
+        return { reason: "includes-known-no", letter: letter };
+      }
     }
 
-    return "yes";
+    return "legal";
   };
 };
 

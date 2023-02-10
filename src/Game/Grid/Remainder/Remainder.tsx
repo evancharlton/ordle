@@ -30,7 +30,7 @@ export const usePossibilities = (guesses: string[]) => {
     let filtered = [...words];
     guesses.forEach((guess) => {
       const test = getLegality(word, guess);
-      filtered = filtered.filter((w) => test(w) === "yes");
+      filtered = filtered.filter((w) => test(w) === "legal");
     });
     return { remainders: filtered, formattedCount: format(filtered.length) };
   }, [guesses, showRemaining, word, words]);

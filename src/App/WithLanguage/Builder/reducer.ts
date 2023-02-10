@@ -1,3 +1,5 @@
+import { never } from "../../../utils";
+
 type State = {
   mode: "solution" | "guess";
   solution: string;
@@ -14,10 +16,6 @@ type Action =
   | { mode: "remove-letter" }
   | { mode: "remove-guess"; guess: string }
   | { mode: "reset-guess" };
-
-const never = (v: never) => {
-  throw new Error(`Impossible situation: ${v}`);
-};
 
 export const reducer = (state: State, action: Action): State => {
   const { mode } = action;
@@ -124,8 +122,7 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     default: {
-      never(mode);
-      throw new Error("Impossible situation");
+      return never(mode, state);
     }
   }
 };
