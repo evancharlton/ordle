@@ -11,6 +11,6 @@
 }
 
 .randomIcon:hover,
-.randomIcon:focus-focus {
-  color: white;
+.randomIcon:focus-visible {
+  color: var(--primary-color);
 }

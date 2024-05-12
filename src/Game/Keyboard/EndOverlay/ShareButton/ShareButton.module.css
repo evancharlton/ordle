@@ -12,5 +12,5 @@
 
 .shareIcon:hover,
 .shareIcon:focus-visible {
-  color: white;
+  color: var(--primary-color);
 }

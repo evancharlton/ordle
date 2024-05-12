@@ -12,5 +12,5 @@
 
 .icon:hover,
 .icon:focus-visible {
-  color: white;
+  color: var(--primary-color);
 }

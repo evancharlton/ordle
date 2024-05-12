@@ -13,6 +13,7 @@
   --link-color: #0aacf2;
   --dictionary-color: #999a;
   --secondary-text: #999a;
+  --primary-color: #000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +27,7 @@
     --secondary-text: #999;
     --no-color: #111a;
     --unknown-color: #999a;
+    --primary-color: #fff;
   }
 }
 

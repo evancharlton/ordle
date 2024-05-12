@@ -12,7 +12,7 @@
 
 .helpIcon:hover,
 .helpIcon:focus-visible {
-  color: white;
+  color: var(--primary-color);
 }
 
 .section {
