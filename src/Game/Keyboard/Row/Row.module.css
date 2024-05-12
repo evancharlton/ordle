@@ -10,7 +10,7 @@
 }
 
 .row > div:hover,
-.row > div:focus {
+.row > div:focus-visible {
   box-shadow: 0px 0px 2px 2px var(--letter-color);
   transition: all 0.25s;
 }

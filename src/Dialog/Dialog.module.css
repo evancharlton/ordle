@@ -55,7 +55,7 @@
 }
 
 .header button:hover,
-.header button:focus {
+.header button:focus-visible {
   background-color: #999a;
 }
 
@@ -96,6 +96,6 @@
 }
 
 .dialog footer button:hover,
-.dialog footer button:focus {
+.dialog footer button:focus-visible {
   background-color: #999a;
 }

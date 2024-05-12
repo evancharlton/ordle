@@ -16,7 +16,7 @@
 
 .flag:hover,
 .flag:active,
-.flag:focus {
+.flag:focus-visible {
   filter: saturate(1);
   text-decoration: none;
 }

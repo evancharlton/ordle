@@ -11,6 +11,6 @@
 }
 
 .icon:hover,
-.icon:focus {
+.icon:focus-visible {
   color: white;
 }

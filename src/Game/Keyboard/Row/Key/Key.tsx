@@ -10,7 +10,6 @@ type Props = {
 };
 
 const Key = ({ letter, enabled }: Props) => {
-  const ref = useRef<HTMLDivElement | null>(null);
   const { add } = useGuess();
 
   const state = useLetterMap(letter);
@@ -30,7 +29,6 @@ const Key = ({ letter, enabled }: Props) => {
       }
 
       add(letter);
-      ref.current?.focus();
     },
     [add, letter, enabled]
   );
@@ -64,7 +62,6 @@ const Key = ({ letter, enabled }: Props) => {
         .join(" ")}
       onClick={onClick}
       role="button"
-      ref={ref}
       tabIndex={0}
     >
       {letter}

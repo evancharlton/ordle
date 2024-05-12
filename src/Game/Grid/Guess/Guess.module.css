@@ -1,7 +1,7 @@
 .guess,
 .guess:hover,
 .guess:active,
-.guess:focus,
+.guess:focus-visible,
 .guess:visited {
   display: flex;
   flex-direction: row;
@@ -26,7 +26,7 @@
 }
 
 .guess:hover .spacer,
-.guess:focus .spacer,
+.guess:focus-visible .spacer,
 .guess:active .spacer {
   color: var(--link-color);
 }

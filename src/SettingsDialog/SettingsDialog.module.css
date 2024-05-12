@@ -43,9 +43,9 @@
 }
 
 .buttons .logout:hover,
-.buttons .logout:focus,
+.buttons .logout:focus-visible,
 .buttons .login:hover,
-.buttons .login:focus {
+.buttons .login:focus-visible {
   color: var(--link-color);
 }
 

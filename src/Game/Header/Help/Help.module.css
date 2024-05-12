@@ -11,7 +11,7 @@
 }
 
 .helpIcon:hover,
-.helpIcon:focus {
+.helpIcon:focus-visible {
   color: white;
 }
 
