@@ -68,7 +68,7 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
     }
     return (
       <a
-        href={`https://naob.no/søk/${guess}`}
+        href={`https://naob.no/søk?q=${guess}`}
         target="_blank"
         rel="noreferrer noopener"
         className={classes.guess}

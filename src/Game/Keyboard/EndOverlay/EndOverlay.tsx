@@ -7,7 +7,7 @@ import ShareButton from "./ShareButton";
 const Word = ({ word }: { word: string }) => (
   <h2>
     <a
-      href={`https://naob.no/søk/${word}`}
+      href={`https://naob.no/søk?q=${word}`}
       target="naob"
       rel="noreferrer noopener"
     >
