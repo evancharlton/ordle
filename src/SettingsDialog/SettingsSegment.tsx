@@ -4,7 +4,7 @@ import { useSettings, useUpdateSettings } from "../Game";
 import classes from "./SettingsSegment.module.css";
 
 const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
-  const { strict, showRemaining } = useSettings();
+  const { strict, showRemaining, hapticFeedback } = useSettings();
   const updateSettings = useUpdateSettings();
 
   return (
@@ -29,7 +29,7 @@ const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
         </div>
         <div className={classes.row}>
           <div className={classes.info}>
-            <label className={classes.toggleLabel} htmlFor="strict-mode">
+            <label className={classes.toggleLabel} htmlFor="show-count">
               Vis antall
             </label>
             <p>
@@ -43,7 +43,7 @@ const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
           <input
             className={classes.toggle}
             type="checkbox"
-            id="strict-mode"
+            id="show-count"
             onChange={() => {
               updateSettings((old) => ({
                 ...old,
@@ -51,6 +51,26 @@ const SettingsSegment = (props: Pick<SegmentProps, "id">) => {
               }));
             }}
             checked={!!showRemaining}
+          />
+        </div>
+        <div className={classes.row}>
+          <div className={classes.info}>
+            <label className={classes.toggleLabel} htmlFor="haptic-feedback">
+              Fysisk tilbakemelding
+            </label>
+            <p>Vibrere når bokstaver trykkes</p>
+          </div>
+          <input
+            className={classes.toggle}
+            type="checkbox"
+            id="haptic-feedback"
+            onChange={() => {
+              updateSettings((old) => ({
+                ...old,
+                hapticFeedback: !old.hapticFeedback,
+              }));
+            }}
+            checked={!!hapticFeedback}
           />
         </div>
       </>

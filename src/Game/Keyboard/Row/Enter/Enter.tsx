@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { MdOutlineKeyboardReturn } from "react-icons/md";
-import { useGuess } from "../../..";
+import { useGuess, useSettings } from "../../../guess";
 import classes from "../Row.module.css";
 
 const Enter = () => {
   const { word, commit } = useGuess();
-
+  const { hapticFeedback } = useSettings();
   const enoughLetters = useRef(false);
   enoughLetters.current = word.length === 5;
 
@@ -35,8 +35,10 @@ const Enter = () => {
     }
 
     commit();
-    navigator.vibrate(10);
-  }, [commit]);
+    if (hapticFeedback) {
+      navigator.vibrate(10);
+    }
+  }, [commit, hapticFeedback]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);

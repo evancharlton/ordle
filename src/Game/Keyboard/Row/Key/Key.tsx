@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useLetterMap } from "../..";
-import { useGuess } from "../../..";
+import { useGuess, useSettings } from "../../../guess";
 import classes from "./Key.module.css";
 import buttonClasses from "../Row.module.css";
 
@@ -11,7 +11,7 @@ type Props = {
 
 const Key = ({ letter, enabled }: Props) => {
   const { add } = useGuess();
-
+  const { hapticFeedback } = useSettings();
   const state = useLetterMap(letter);
 
   const onKeyDown = useCallback(
@@ -39,8 +39,10 @@ const Key = ({ letter, enabled }: Props) => {
     }
 
     add(letter);
-    navigator.vibrate(10);
-  }, [add, letter, enabled]);
+    if (hapticFeedback) {
+      navigator.vibrate(10);
+    }
+  }, [add, letter, enabled, hapticFeedback]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);

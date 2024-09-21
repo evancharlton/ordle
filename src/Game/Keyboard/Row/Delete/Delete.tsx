@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { MdOutlineBackspace } from "react-icons/md";
-import { useGuess } from "../../..";
+import { useGuess, useSettings } from "../../..";
 import classes from "../Row.module.css";
 
 const Delete = () => {
   const { word, remove } = useGuess();
+  const { hapticFeedback } = useSettings();
 
   const hasLetters = useRef(false);
   hasLetters.current = word.length > 0;
@@ -31,8 +32,10 @@ const Delete = () => {
     }
 
     remove();
-    navigator.vibrate(10);
-  }, [remove]);
+    if (hapticFeedback) {
+      navigator.vibrate(10);
+    }
+  }, [remove, hapticFeedback]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);

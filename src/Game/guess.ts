@@ -188,6 +188,7 @@ const settings = atom({
   default: {
     strict: true,
     showRemaining: true,
+    hapticFeedback: true,
   },
 });
 
