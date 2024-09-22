@@ -4,24 +4,41 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: opentofu/setup-opentofu@v1
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
         with:
           persist-credentials: false
 
       - name: Install
+        env:
+          PUBLIC_URL: /
         run: |
           npm ci
+
       - name: "Set environment variables"
         run: |
           echo "VITE_RELEASE=${GITHUB_SHA:0:8}" >> $GITHUB_ENV
       - name: Build
         run: |
           npm run build
+          echo "ordle-app.no" > dist/CNAME
+
+      - run: tofu init
+      - id: plan
+        run: tofu plan -no-color
+        env:
+          TF_VAR_cloudflare_api_token: ${{ secrets.TF_VAR_cloudflare_api_token }}
+
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist # The folder the action should deploy.
+          clean: true # Automatically remove deleted files from the deploy branch
+
+      - run: |
+          tofu state rm cloudflare_zone_settings_override.ssl_settings
+          tofu apply -auto-approve
+        env:
+          TF_VAR_cloudflare_api_token: ${{ secrets.TF_VAR_cloudflare_api_token }}
