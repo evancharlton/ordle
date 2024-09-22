@@ -10,7 +10,7 @@ export const useError = () => {
   const timeoutRef = useRef<number>();
   const [value, setError] = useRecoilState(error);
   const callback = useCallback(
-    (errorString) => {
+    (errorString: string) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }

@@ -46,7 +46,7 @@ const Accordion = ({ initial, children, mode }: Props) => {
   });
 
   const setActive = useCallback(
-    (segmentId) => {
+    (segmentId: string) => {
       if (mode === "multiple") {
         setSegments((s) => ({ ...s, [segmentId]: !s[segmentId] }));
       } else {

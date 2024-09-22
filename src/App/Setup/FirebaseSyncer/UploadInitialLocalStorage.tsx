@@ -7,7 +7,7 @@ type Props = {
   node: string;
 };
 
-const UploadInitialLocalStorage = ({ children, node }: Props) => {
+const UploadInitialLocalStorage = ({ children }: Props) => {
   const { path } = useLogin();
 
   useEffect(() => {

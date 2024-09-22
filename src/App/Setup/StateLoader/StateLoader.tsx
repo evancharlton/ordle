@@ -25,7 +25,7 @@ const StateLoader = ({ children }: Props) => {
       const parsed = (() => {
         try {
           return JSON.parse(stored);
-        } catch (ex) {
+        } catch {
           return {};
         }
       })();

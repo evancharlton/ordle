@@ -15,26 +15,30 @@ const DataLoader = ({ children }: Props) => {
   const { lang } = useParams();
   const [words, setWords] = useState<string[]>([]);
   const [error, setError] = useState<Error | null>(null);
-  const url = [process.env.PUBLIC_URL, lang ?? "", "words.json"].join("/");
+  const url = [import.meta.env.BASE_URL, lang ?? "", "words.json"]
+    .join("/")
+    .replace(/\/+/g, "/");
 
   useEffect(() => {
-    store.getItem<string[]>(url).then(async (cachedValue) => {
-      if (cachedValue) {
-        setWords(cachedValue);
-      }
+    store
+      .getItem<string[]>(url)
+      .then(async (cachedValue: typeof words | null) => {
+        if (cachedValue) {
+          setWords(cachedValue);
+        }
 
-      if (window.navigator.onLine) {
-        try {
-          const fetchedValue = await fetch(url).then((resp) => resp.json());
-          setWords(fetchedValue);
-          await store.setItem(url, fetchedValue);
-        } catch (e) {
-          if (e instanceof Error) {
-            setError(e);
+        if (window.navigator.onLine) {
+          try {
+            const fetchedValue = await fetch(url).then((resp) => resp.json());
+            setWords(fetchedValue);
+            await store.setItem(url, fetchedValue);
+          } catch (e) {
+            if (e instanceof Error) {
+              setError(e);
+            }
           }
         }
-      }
-    });
+      });
   }, [lang, setWords, url]);
 
   if (error) {

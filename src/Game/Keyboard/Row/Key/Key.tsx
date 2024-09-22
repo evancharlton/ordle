@@ -45,9 +45,9 @@ const Key = ({ letter, enabled }: Props) => {
   }, [add, letter, enabled, hapticFeedback]);
 
   useEffect(() => {
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keypress", onKeyDown);
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keypress", onKeyDown);
     };
   }, [onKeyDown]);
 

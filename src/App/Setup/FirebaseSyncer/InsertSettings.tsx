@@ -12,7 +12,7 @@ const InsertSettings = ({
   const updateSettings = useUpdateSettings();
 
   const onSettingsChanged = useCallback(
-    (snap) => {
+    (snap: firebase.database.DataSnapshot) => {
       const value = snap.val();
       if (!value) {
         console.warn("Remote settings were deleted");
