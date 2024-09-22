@@ -19,7 +19,7 @@ const SettingsDialog = ({ onClose }: Props) => {
           <UserSegment id="login" />
         </Accordion>
         <div className={classes.version}>
-          versjon<code>{import.meta.env.VITE_RELEASE ?? "development"}</code>
+          versjon <code>{import.meta.env.VITE_RELEASE ?? "development"}</code>
         </div>
       </Dialog>
     );
