@@ -73,7 +73,7 @@ resource "cloudflare_record" "txt_records_no" {
     "_dmarc"                               = "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;",
     "*._domainkey"                         = "v=DKIM1; p=",
     "ordle-app.no"                         = "v=spf1 -all",
-    "_github-pages-challenge-evancharlton" = "ee90a25383ffe6a653b8c834a4b3c5",
+    "_github-pages-challenge-evancharlton" = "085db663e91db52924a0d7719dbf11",
   }
   zone_id = local.zones["ordle-app.no"]
   name    = each.key
