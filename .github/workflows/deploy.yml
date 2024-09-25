@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: |
           npm run build
-          # echo "ordle-app.no" > dist/CNAME
+          echo "ordle-app.no" > dist/CNAME
 
       - run: tofu init
       - id: plan
