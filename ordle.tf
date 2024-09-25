@@ -105,6 +105,6 @@ resource "cloudflare_zone_settings_override" "ssl_settings" {
 
   settings {
     automatic_https_rewrites = "on"
-    ssl                      = "strict"
+    ssl                      = "flexible"
   }
 }
