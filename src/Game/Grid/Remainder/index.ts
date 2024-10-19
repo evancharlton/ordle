@@ -1,2 +1,2 @@
 export { default } from "./Remainder";
-export { usePossibilities } from "./Remainder";
+export { usePossibilities } from "./usePossibilities";
