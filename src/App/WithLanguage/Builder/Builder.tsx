@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useReducer } from "react";
+import { useCallback, useEffect, useMemo, useReducer } from "react";
 import {
   MdRemoveCircleOutline,
   MdOutlineArrowBack,
@@ -11,11 +11,15 @@ import { Context } from "../../Setup/GameLoader";
 import { reducer } from "./reducer";
 import classes from "./Builder.module.css";
 import { usePossibilities } from "../../../Game/Grid/Remainder";
+import { useWords } from "../../Setup/DataLoader";
 
 const Blank: typeof MdRemoveCircleOutline = () => <></>;
 
 export const Builder = () => {
-  const [state, dispatch] = useReducer(reducer, {
+  const [firstWord] = useWords();
+  const N = firstWord.length;
+
+  const [state, dispatch] = useReducer(reducer(N), {
     mode: "solution",
     solution: "",
     guess: "",
@@ -72,20 +76,6 @@ export const Builder = () => {
     ));
   }, [guesses, onGuessClick]);
 
-  const filler = useMemo(() => {
-    if (guesses.length === 5) {
-      return null;
-    }
-
-    const out: React.ReactNode[] = [];
-    for (let i = 0; i < 4 - guesses.length; i += 1) {
-      out.push(
-        <Guess key={`filler-${i}`} guess={""} onClick={() => {}} Icon={Blank} />
-      );
-    }
-    return out;
-  }, [guesses.length]);
-
   return (
     <Context.Provider value={{ word: solution, gameNumber: -1 }}>
       <div className={classes.container}>
@@ -101,6 +91,7 @@ export const Builder = () => {
           {error && <span style={{ textAlign: "center" }}>{error}</span>}
           {renderedGuesses}
           <Guess
+            length={N}
             guess={guess}
             Icon={
               mode === "guess"
@@ -110,15 +101,15 @@ export const Builder = () => {
                 : Blank
             }
             onClick={() => {
-              if (valid && guess.length === 5) {
+              if (valid && guess.length === N) {
                 dispatch({ mode: "commit" });
               } else {
                 dispatch({ mode: "reset-guess" });
               }
             }}
           />
-          {filler}
           <Guess
+            length={N}
             guess={solution}
             Icon={
               mode === "solution"

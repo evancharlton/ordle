@@ -7,7 +7,6 @@ type Props = {
 };
 
 const StateLoader = ({ children }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setGuesses] = useGuesses();
   const key = useStorageKey();
 

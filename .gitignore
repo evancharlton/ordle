@@ -27,3 +27,6 @@ dist-ssr
 .terraform
 .terraform.lock.hcl
 terraform.*.backup
+
+# Build artifacts
+*.tsbuildinfo

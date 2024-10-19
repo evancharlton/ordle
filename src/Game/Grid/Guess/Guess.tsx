@@ -8,10 +8,12 @@ type Props = {
   guess: string;
   Icon?: typeof MdOpenInNew;
   onClick?: () => void;
+  length?: number;
 };
 
-const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
+const Guess = ({ guess, Icon = MdOpenInNew, onClick, length }: Props) => {
   const word = useWord();
+  const N = length ?? word.length;
 
   const letters = useMemo(() => {
     const out = new Array(0);
@@ -24,7 +26,7 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
       );
 
     // Find everything that's correct.
-    for (let i = 0; i < word.length; i += 1) {
+    for (let i = 0; i < N; i += 1) {
       if (guess[i] !== word[i]) {
         continue;
       }
@@ -34,7 +36,7 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
     }
 
     // Find everything that's right, but in the wrong spot.
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < N; i += 1) {
       if (out[i]) {
         continue;
       }
@@ -47,7 +49,7 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
     }
 
     // Everything else is wrong
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < N; i += 1) {
       if (out[i]) {
         continue;
       }
@@ -56,7 +58,7 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick }: Props) => {
     }
 
     return out;
-  }, [word, guess]);
+  }, [word, N, guess]);
 
   const Wrapper = ({ children }: { children: React.ReactNode }) => {
     if (onClick) {

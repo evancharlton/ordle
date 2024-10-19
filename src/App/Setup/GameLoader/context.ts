@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useWords } from "../DataLoader";
 
 type GameContext = {
@@ -17,5 +17,12 @@ export const useGameNumber = () => {
 export const useWord = () => {
   const words = useWords();
   const { gameNumber, word } = useContext(Context);
-  return word ?? words[gameNumber];
+  const firstWord = words[0];
+
+  const chosenWord = word ?? words[gameNumber];
+
+  return useMemo(() => {
+    const filler = new Array(firstWord.length).fill(" ").join("");
+    return `${chosenWord}${filler}`.substring(0, firstWord.length);
+  }, [chosenWord, firstWord.length]);
 };

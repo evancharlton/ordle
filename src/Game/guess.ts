@@ -81,6 +81,8 @@ export const useGuess = () => {
   const { strict } = useSettings();
   const lastGuessV = useRecoilValue(lastGuess);
 
+  const N = word.length;
+
   return {
     word: guessV,
     add: (letter: string) => {
@@ -93,7 +95,7 @@ export const useGuess = () => {
         return;
       }
 
-      setGuessV((v) => `${v}${l}`.substring(0, 5));
+      setGuessV((v) => `${v}${l}`.substring(0, N));
     },
     remove: () => {
       if (finished) {
@@ -110,8 +112,8 @@ export const useGuess = () => {
         return;
       }
 
-      if (guessV.length !== 5) {
-        setError("For kort (nøyaktig fem bokstaver)");
+      if (guessV.length !== N) {
+        setError(`For kort (kreves nøyaktig ${N} bokstaver)`);
         return;
       }
 

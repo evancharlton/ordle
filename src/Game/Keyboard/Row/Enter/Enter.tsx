@@ -2,12 +2,14 @@ import { useCallback, useEffect, useRef } from "react";
 import { MdOutlineKeyboardReturn } from "react-icons/md";
 import { useGuess, useSettings } from "../../../guess";
 import classes from "../Row.module.css";
+import { useWord } from "../../../../App/Setup/GameLoader";
 
 const Enter = () => {
   const { word, commit } = useGuess();
+  const solution = useWord();
   const { hapticFeedback } = useSettings();
   const enoughLetters = useRef(false);
-  enoughLetters.current = word.length === 5;
+  enoughLetters.current = word.length === solution.length;
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -22,9 +24,11 @@ const Enter = () => {
       commit();
 
       try {
-        // @ts-expect-error
+        // @ts-expect-error - whatever
         document.activeElement?.blur();
-      } catch {}
+      } catch {
+        // This is okay to ignore
+      }
     },
     [commit]
   );
