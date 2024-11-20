@@ -10,6 +10,7 @@ jobs:
         with:
           submodules: "true"
           persist-credentials: false
+          token: ${{ secrets.ORDLIST_TOKEN }}
 
       - name: Install
         env:
