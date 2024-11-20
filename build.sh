@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 echo "Copying wordlists ..."
 find wordlist/ordle \
