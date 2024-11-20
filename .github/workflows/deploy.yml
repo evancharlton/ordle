@@ -19,10 +19,10 @@ jobs:
       - name: "Set environment variables"
         run: |
           echo "VITE_RELEASE=${GITHUB_SHA:0:8}" >> $GITHUB_ENV
+
       - name: Build
         run: |
-          npm run build
-          echo "ordle-app.no" > dist/CNAME
+          ./build.sh
 
       - run: tofu init
       - id: plan

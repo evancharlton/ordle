@@ -30,3 +30,7 @@ terraform.*.backup
 
 # Build artifacts
 *.tsbuildinfo
+
+# Wordlists
+public/nb-*
+public/nn-*
