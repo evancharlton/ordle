@@ -8,6 +8,7 @@ find wordlist/ordle \
   -exec cp -Rv {} public/ \; \
 || exit $?
 
+npm ci
 npm run build || exit $?
 
 echo "ordle-app.no" > dist/CNAME
