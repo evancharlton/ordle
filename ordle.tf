@@ -18,7 +18,7 @@ terraform {
 locals {
   # Zone IDs from Cloudflare
   zones = {
-    "ordle-app.no"  = "639b49d65fe403a6d1bdc89b416f7619"
+    "ordle-app.no" = "639b49d65fe403a6d1bdc89b416f7619"
   }
 
   project = "ordle"
@@ -27,7 +27,7 @@ locals {
   redirects = [
   ]
 
-  github_owner = "evancharlton"
+  github_owner     = "evancharlton"
   github_challenge = "085db663e91db52924a0d7719dbf11"
 }
 
@@ -170,11 +170,72 @@ resource "cloudflare_record" "github_challenge" {
 }
 
 resource "cloudflare_record" "cnames_www" {
-  for_each = setunion([local.main_domain], local.redirects)
-  zone_id  = local.zones[each.value]
-  name     = "www"
-  content  = each.value
-  proxied  = true
-  ttl      = 1
-  type     = "CNAME"
+  zone_id = local.zones[local.main_domain]
+  name    = "www"
+  content = local.main_domain
+  proxied = true
+  ttl     = 1
+  type    = "CNAME"
+}
+
+resource "cloudflare_record" "ip4_redirect_www" {
+  for_each = {
+    for pair in setproduct(
+      toset(local.redirects),
+      ["@", "www"]
+      ) : "${pair[1]}/${pair[0]}}" => {
+      domain = pair[0]
+      name   = pair[1]
+    }
+  }
+
+  zone_id = local.zones[each.value.domain]
+  name    = each.value.name
+  content = "192.0.2.1"
+  proxied = true
+  ttl     = 1
+  type    = "A"
+}
+
+resource "cloudflare_record" "ip6_redirect_www" {
+  for_each = {
+    for pair in setproduct(
+      toset(local.redirects),
+      ["@", "www"]
+      ) : "${pair[1]}/${pair[0]}}" => {
+      domain = pair[0]
+      name   = pair[1]
+    }
+  }
+
+  zone_id = local.zones[each.value.domain]
+  name    = each.value.name
+  content = "100::"
+  proxied = true
+  ttl     = 1
+  type    = "AAAA"
+}
+
+resource "cloudflare_ruleset" "redirect_to_main" {
+  for_each = toset(local.redirects)
+
+  zone_id     = local.zones[each.value]
+  name        = "Redirect to ${local.main_domain}"
+  description = "Redirect to ${local.main_domain}"
+  kind        = "zone"
+  phase       = "http_request_dynamic_redirect"
+
+  rules {
+    action = "redirect"
+    action_parameters {
+      from_value {
+        preserve_query_string = true
+        status_code           = 302
+        target_url {
+          expression = "concat(\"https://${local.main_domain}\", http.request.uri.path)"
+        }
+      }
+    }
+    expression = "true"
+  }
 }
