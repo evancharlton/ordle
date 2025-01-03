@@ -14,7 +14,13 @@ const Remaining = () => {
     return out;
   }, [word.length]);
 
-  return <div className={classes.remaining}>{children}</div>;
+  return (
+    <>
+      <div />
+      <div className={classes.remaining}>{children}</div>
+      <div />
+    </>
+  );
 };
 
 export default Remaining;

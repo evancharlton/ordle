@@ -1,8 +1,16 @@
-.message {
-  padding: 8px;
-  color: #999;
-}
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 
-.count {
-  color: var(--letter-color)
+  .message {
+    padding: 8px;
+    color: #999;
+  }
+
+  .count {
+    color: var(--letter-color);
+  }
 }

@@ -1,8 +1,16 @@
-.grid {
-  width: 100%;
+.container {
+  flex: 1;
+
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  position: relative;
+
+  .grid {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 1fr min-content 1fr;
+    grid-template-rows: repeat(7, min-content);
+  }
 }

@@ -7,12 +7,7 @@ import classes from "./Grid.module.css";
 import { useGuesses } from "..";
 import ErrorMessage from "../../ErrorMessage";
 
-type Props = {} & Pick<
-  React.HTMLAttributes<HTMLDivElement>,
-  "style" | "className"
->;
-
-export const Grid = (props: Props) => {
+export const Grid = () => {
   const [guesses] = useGuesses();
 
   const grid = useMemo(() => {
@@ -29,13 +24,12 @@ export const Grid = (props: Props) => {
   }, [guesses]);
 
   return (
-    <div
-      {...props}
-      className={[props.className, classes.grid].filter(Boolean).join(" ")}
-    >
-      {grid}
-      <Remainder />
-      <ErrorMessage />
+    <div className={classes.container}>
+      <div className={classes.grid}>
+        {grid}
+        <Remainder />
+        <ErrorMessage />
+      </div>
     </div>
   );
 };

@@ -1,12 +1,11 @@
-import { useState, useMemo, useCallback } from "react";
-import { createPortal } from "react-dom";
+import { useState, useCallback } from "react";
 import { MdOutlineHelpOutline } from "react-icons/md";
 import classes from "./Help.module.css";
-import Dialog from "../../../Dialog";
 import Letter from "../../Grid/Letter";
 import { useParams } from "react-router";
 import Accordion from "../../../Accordion";
 import Segment from "../../../Accordion/Segment";
+import { Modal } from "../../../spa-components/Modal";
 
 const Help = () => {
   const { lang } = useParams();
@@ -21,12 +20,12 @@ const Help = () => {
     localStorage.setItem(key, String(Date.now()));
   }, [key]);
 
-  const modal = useMemo(() => {
-    if (!showing) {
-      return null;
-    }
-    return (
-      <Dialog title="Ordle" onClose={onClose}>
+  return (
+    <>
+      <button onClick={() => setShowing(true)}>
+        <MdOutlineHelpOutline />
+      </button>
+      <Modal open={showing} title="Ordle" onClose={onClose}>
         <div>
           <p>
             <strong>Ordle</strong> er en norsk variant av{" "}
@@ -88,21 +87,8 @@ const Help = () => {
             </Segment>
           </Accordion>
         </div>
-      </Dialog>
-    );
-  }, [showing, onClose]);
-
-  const portal = createPortal(showing ? modal : null, document.body);
-
-  return (
-    <div
-      className={classes.helpIcon}
-      role="button"
-      onClick={() => setShowing(true)}
-    >
-      <MdOutlineHelpOutline />
-      {portal}
-    </div>
+      </Modal>
+    </>
   );
 };
 

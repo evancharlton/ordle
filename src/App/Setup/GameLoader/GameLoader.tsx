@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useWords } from "../DataLoader/context";
 import { Context } from "./context";
 import Loading from "../../../Loading";

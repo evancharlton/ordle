@@ -1,7 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback, useState } from "react";
 import { MdOutlineSettings } from "react-icons/md";
-import classes from "./Settings.module.css";
 import UserDialog from "../../../SettingsDialog";
 
 const Settings = () => {
@@ -10,25 +8,13 @@ const Settings = () => {
     setShowing(false);
   }, []);
 
-  const modal = useMemo(() => {
-    if (!showing) {
-      return null;
-    }
-
-    return <UserDialog onClose={onClose} />;
-  }, [onClose, showing]);
-
-  const portal = createPortal(modal, document.body);
-
   return (
-    <div
-      className={classes.icon}
-      role="button"
-      onClick={() => setShowing(true)}
-    >
-      <MdOutlineSettings />
-      {portal}
-    </div>
+    <>
+      <button onClick={() => setShowing(true)}>
+        <MdOutlineSettings />
+      </button>
+      <UserDialog open={showing} onClose={onClose} />
+    </>
   );
 };
 

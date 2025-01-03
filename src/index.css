@@ -1,4 +1,10 @@
 :root {
+  --theme-color: #0aacf2;
+
+  --header-background-color: #000;
+  --header-foreground-color: var(--theme-color);
+  --header-button-color: var(--theme-color);
+
   --letter-color: #000;
   --letter-color-rgb: 0, 0, 0;
   --letter-border: #000a;
@@ -14,6 +20,10 @@
   --dictionary-color: #999a;
   --secondary-text: #999a;
   --primary-color: #000;
+
+  font-family: "Roboto", sans-serif;
+  color: var(--letter-color);
+  background-color: var(--background-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,14 +41,11 @@
   }
 }
 
-body,
-html {
-  color: var(--letter-color);
-  background-color: var(--background-color);
+body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
-  height: 100%;
+  height: 100dvh;
 }
 
 a,
@@ -53,5 +60,7 @@ a:focus-visible {
 }
 
 #root {
-  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

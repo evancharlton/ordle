@@ -56,3 +56,21 @@
   border-top: 1px solid #999a;
   padding: 4px;
 }
+
+.languages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 16px;
+
+  a {
+    padding: 0.5em 1em;
+    border: 2px solid rgba(from var(--link-color) r g b / 0.8);
+    border-radius: 0.5em;
+  }
+
+  a.active {
+    background-color: var(--link-color);
+    color: #fff;
+  }
+}

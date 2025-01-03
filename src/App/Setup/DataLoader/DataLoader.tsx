@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
@@ -42,6 +42,7 @@ const DataLoader = ({ children }: Props) => {
   }, [lang, setWords, url]);
 
   if (error) {
+    console.log(`TCL ~ DataLoader ~ error:`, error);
     return (
       <div className={classes.center}>
         <h1>

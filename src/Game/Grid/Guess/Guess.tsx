@@ -20,10 +20,9 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick, length }: Props) => {
 
     const letters = word
       .split("")
-      .reduce<Record<string, number>>(
-        (acc, l) => ({ ...acc, [l]: (acc[l] || 0) + 1 }),
-        {}
-      );
+      .reduce<
+        Record<string, number>
+      >((acc, l) => ({ ...acc, [l]: (acc[l] || 0) + 1 }), {});
 
     // Find everything that's correct.
     for (let i = 0; i < N; i += 1) {
@@ -82,13 +81,11 @@ const Guess = ({ guess, Icon = MdOpenInNew, onClick, length }: Props) => {
   };
 
   return (
-    <Wrapper>
-      <div className={classes.spacer}></div>
-      {letters}
-      <div className={classes.spacer}>
-        <Icon />
-      </div>
-    </Wrapper>
+    <>
+      <div />
+      <Wrapper>{letters}</Wrapper>
+      <Icon />
+    </>
   );
 };
 

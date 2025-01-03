@@ -1,9 +1,0 @@
-.header {
-  display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid #999a;
-  width: 100%;
-  justify-content: center;
-
-  color: #999;
-}

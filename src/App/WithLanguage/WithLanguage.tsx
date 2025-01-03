@@ -1,9 +1,9 @@
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router";
 import Game from "../Setup";
 import DataLoader from "../Setup/DataLoader";
-import React, { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
-const LazyBuilder = React.lazy(() => import("./Builder"));
+const LazyBuilder = lazy(() => import("./Builder"));
 
 export const WithLanguage = () => {
   const { lang } = useParams();

@@ -8,6 +8,9 @@ find wordlist/ordle \
   -exec cp -Rv {} public/ \; \
 || exit $?
 
+rm -rf public/nb && cp -Rv public/nb-no public/nb
+rm -rf public/nn && cp -Rv public/nn-no public/nn
+
 npm ci
 npm run build || exit $?
 

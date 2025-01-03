@@ -16,7 +16,13 @@ const Input = () => {
     return out;
   }, [word, solution.length]);
 
-  return <div className={classes.input}>{letters}</div>;
+  return (
+    <>
+      <div />
+      <div className={classes.input}>{letters}</div>
+      <div />
+    </>
+  );
 };
 
 export default Input;
