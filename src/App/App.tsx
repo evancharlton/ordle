@@ -7,11 +7,14 @@ import { Header } from "../spa-components/Header";
 import LanguageSelector from "../spa-components/LanguageSelector";
 import PwaContainer from "../spa-components/PwaContainer";
 import classes from "./Page.module.css";
+import Help from "../Game/Header/Help";
 
 const Page = () => {
   return (
     <div className={classes.container}>
-      <Header logo="/logo.svg" title="Ordle" />
+      <Header logo="/logo.svg" title="Ordle">
+        <Help />
+      </Header>
       <div className={classes.content}>
         <Outlet />
       </div>
