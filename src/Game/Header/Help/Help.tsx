@@ -2,14 +2,12 @@ import { useState, useCallback } from "react";
 import { MdOutlineHelpOutline } from "react-icons/md";
 import classes from "./Help.module.css";
 import Letter from "../../Grid/Letter";
-import { useParams } from "react-router";
 import Accordion from "../../../Accordion";
 import Segment from "../../../Accordion/Segment";
 import { Modal } from "../../../spa-components/Modal";
 
 const Help = () => {
-  const { lang } = useParams();
-  const key = ["ordle", lang, "help-dialog"].join("/");
+  const key = ["ordle", "help-dialog"].join("/");
   const [showing, setShowing] = useState(() => {
     const shownTimestamp = localStorage.getItem(key);
     return !shownTimestamp;
