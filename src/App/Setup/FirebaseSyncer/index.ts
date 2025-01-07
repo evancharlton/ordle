@@ -1,1 +1,1 @@
-export { default } from './FirebaseSyncer';
+export { default } from "./FirebaseSyncer";

@@ -30,7 +30,7 @@ const Enter = () => {
         // This is okay to ignore
       }
     },
-    [commit]
+    [commit],
   );
 
   const onClick = useCallback(() => {

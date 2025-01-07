@@ -74,7 +74,7 @@ type Scores = {
     string | undefined,
     string | undefined,
     string | undefined,
-    string | undefined
+    string | undefined,
   ];
 };
 export const getScores = (word: string, guess: string): Scores => {
@@ -124,7 +124,7 @@ export const getScores = (word: string, guess: string): Scores => {
 type LetterCounts = Record<string, [number, number]>;
 export const getRequiredLetters = (
   solution: string,
-  guess: string
+  guess: string,
 ): LetterCounts => {
   const counts: LetterCounts = {};
 

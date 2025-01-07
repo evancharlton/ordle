@@ -62,7 +62,7 @@ export const Builder = () => {
     (guess: string) => () => {
       dispatch({ mode: "remove-guess", guess });
     },
-    []
+    [],
   );
 
   const renderedGuesses = useMemo(() => {

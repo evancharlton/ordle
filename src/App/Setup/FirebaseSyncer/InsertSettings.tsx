@@ -21,7 +21,7 @@ const InsertSettings = ({
 
       updateSettings(value);
     },
-    [updateSettings]
+    [updateSettings],
   );
 
   useEffect(() => {

@@ -30,7 +30,7 @@ export const isGuessMap = (item: unknown): item is GuessMap => {
   }
 
   return Object.keys(item).every(
-    (key) => typeof key === "string" && key.length === 5
+    (key) => typeof key === "string" && key.length === 5,
   );
 };
 
@@ -50,7 +50,7 @@ const lastGuess = selector<string>({
     const sorted = Object.entries(guessesV).sort(
       ([_guessA, timeA], [_guessB, timeB]) => {
         return timeB - timeA;
-      }
+      },
     );
     if (sorted.length === 0) {
       return "";
@@ -135,7 +135,7 @@ export const useGuess = () => {
           switch (reason) {
             case "includes-known-no": {
               setError(
-                `Må bruke ikke "${legality.letter.toLocaleUpperCase()}"`
+                `Må bruke ikke "${legality.letter.toLocaleUpperCase()}"`,
               );
               break;
             }
@@ -144,7 +144,7 @@ export const useGuess = () => {
               setError(
                 `Må bruke ikke "${legality.letter.toLocaleUpperCase()}" i posisjon ${
                   legality.column
-                }`
+                }`,
               );
               break;
             }

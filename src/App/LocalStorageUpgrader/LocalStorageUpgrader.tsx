@@ -11,7 +11,7 @@ const VERSION_KEY = "ordle/storageVersion";
 
 const LocalStorageUpgrader = ({ children }: Props) => {
   const [storageVersion, setStorageVersion] = useState(
-    () => +(localStorage.getItem(VERSION_KEY) ?? 1)
+    () => +(localStorage.getItem(VERSION_KEY) ?? 1),
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const LocalStorageUpgrader = ({ children }: Props) => {
               ...acc,
               [guess]: 1_000_000 + i * 10,
             }),
-            {}
+            {},
           );
 
         localStorage.setItem(`backup/${key}`, value);

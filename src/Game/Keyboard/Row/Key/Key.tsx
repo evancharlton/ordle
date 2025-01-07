@@ -30,7 +30,7 @@ const Key = ({ letter, enabled }: Props) => {
 
       add(letter);
     },
-    [add, letter, enabled]
+    [add, letter, enabled],
   );
 
   const onClick = useCallback(() => {

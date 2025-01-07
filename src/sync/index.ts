@@ -1,3 +1,3 @@
-export * from './firebase-import';
-export { default } from './firebase-import';
-export * from './useLogin';
+export * from "./firebase-import";
+export { default } from "./firebase-import";
+export * from "./useLogin";

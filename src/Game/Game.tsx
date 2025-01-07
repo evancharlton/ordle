@@ -93,7 +93,7 @@ const Burger = () => {
 };
 
 const AboutDialog = (
-  props: Pick<ComponentProps<typeof Modal>, "open" | "onClose">
+  props: Pick<ComponentProps<typeof Modal>, "open" | "onClose">,
 ) => {
   return (
     <Modal title="Om Ordle" {...props}>

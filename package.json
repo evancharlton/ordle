@@ -18,13 +18,13 @@
     "react-icons": "^5.3.0",
     "react-router": "^7",
     "recoil": "^0.7.7",
+    "vite-plugin-pwa": "^0.21.1",
     "web-vitals": "^4.2.3",
     "workbox-core": "^7.1.0",
     "workbox-expiration": "^7.1.0",
     "workbox-precaching": "^7.1.0",
     "workbox-routing": "^7.1.0",
-    "workbox-strategies": "^7.1.0",
-    "vite-plugin-pwa": "^0.21.1"
+    "workbox-strategies": "^7.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -40,6 +40,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "prettier": "^3.4.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"

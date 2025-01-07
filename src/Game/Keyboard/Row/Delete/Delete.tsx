@@ -23,7 +23,7 @@ const Delete = () => {
       remove();
       e.preventDefault();
     },
-    [remove]
+    [remove],
   );
 
   const onClick = useCallback(() => {

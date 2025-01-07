@@ -19,7 +19,7 @@ export const useError = () => {
         setError("");
       }, 3000);
     },
-    [setError]
+    [setError],
   );
   return {
     error: value,

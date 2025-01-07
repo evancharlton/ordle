@@ -22,7 +22,7 @@ const UploadNewLocalWords = ({ children, node }: Props) => {
           [guess]: when,
         });
     },
-    [node]
+    [node],
   );
 
   useGuessAdded(onGuessAdded);

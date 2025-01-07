@@ -37,7 +37,7 @@ const Accordion = ({ initial, children, mode }: Props) => {
           }
           return initial.reduce(
             (acc, i) => ({ ...acc, [i]: true }),
-            {} as Record<string, boolean>
+            {} as Record<string, boolean>,
           );
         }
       }
@@ -53,7 +53,7 @@ const Accordion = ({ initial, children, mode }: Props) => {
         setSegments({ [segmentId]: true });
       }
     },
-    [mode]
+    [mode],
   );
 
   return (

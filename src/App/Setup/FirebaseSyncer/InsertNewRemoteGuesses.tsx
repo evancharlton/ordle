@@ -24,7 +24,7 @@ const InsertNewRemoteGuesses = ({ children, node }: Props) => {
         return { ...g, [key]: snap.val() };
       });
     },
-    [setGuesses]
+    [setGuesses],
   );
 
   useEffect(() => {

@@ -86,7 +86,7 @@ export const reducer =
         if (state.mode === "solution") {
           const solution = state.solution.substring(
             0,
-            Math.max(0, state.solution.length - 1)
+            Math.max(0, state.solution.length - 1),
           );
           return {
             ...state,
@@ -97,7 +97,7 @@ export const reducer =
         } else if (state.mode === "guess") {
           const guess = state.guess.substring(
             0,
-            Math.max(0, state.guess.length - 1)
+            Math.max(0, state.guess.length - 1),
           );
           return {
             ...state,
