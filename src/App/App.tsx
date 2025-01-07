@@ -23,7 +23,7 @@ const Page = () => {
 };
 
 const Root = () => (
-  <PwaContainer>
+  <PwaContainer appId="ordle">
     <LocalStorageUpgrader>
       <RecoilRoot>
         <SettingsLoader>
