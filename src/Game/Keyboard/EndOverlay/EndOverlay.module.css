@@ -64,6 +64,8 @@
   gap: 4px;
 
   border-radius: 8px;
-  border-width: 1px;
+  border: 1px solid currentColor;
   background: transparent;
+
+  color: currentColor;
 }
