@@ -1,8 +1,11 @@
 import Grid from "./Grid";
 import Keyboard from "./Keyboard";
 import classes from "./Game.module.css";
-import burgerClasses from "./Burger.module.css";
-import { Action, HamburgerMenu } from "../spa-components/HamburgerMenu";
+import {
+  Action,
+  Content,
+  HamburgerMenu,
+} from "../spa-components/HamburgerMenu";
 import {
   MdInfoOutline,
   MdOutlineAutorenew,
@@ -53,7 +56,7 @@ const Burger = () => {
             setDialog("share");
           }}
         />
-        <div className={burgerClasses.filler}>{/* TODO */}</div>
+        <Content />
         <Action
           icon={MdOutlineAutorenew}
           text="Nytt puslespill"
