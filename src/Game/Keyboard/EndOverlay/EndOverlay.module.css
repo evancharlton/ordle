@@ -46,12 +46,24 @@
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
+
+  gap: 8px;
 }
 
-.actions > * {
+.actions button {
   padding: 4px 8px;
-}
+  font-size: 2em;
 
-.actions > :nth-child(2) {
-  border-left: 1px solid #999a;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  transition: color 0.2s;
+  gap: 4px;
+
+  border-radius: 8px;
+  border-width: 1px;
+  background: transparent;
 }
