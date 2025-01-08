@@ -5,7 +5,6 @@ import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
 import Loading from "../../../Loading";
-import { store } from "../../../storage";
 
 type Props = {
   children: React.ReactNode;
@@ -15,34 +14,15 @@ const DataLoader = ({ children }: Props) => {
   const { lang } = useParams();
   const [words, setWords] = useState<string[]>([]);
   const [error, setError] = useState<Error | null>(null);
-  const url = [import.meta.env.BASE_URL, lang ?? "", "words.json"]
-    .join("/")
-    .replace(/\/+/g, "/");
 
   useEffect(() => {
-    store
-      .getItem<string[]>(url)
-      .then(async (cachedValue: typeof words | null) => {
-        if (cachedValue) {
-          setWords(cachedValue);
-        }
-
-        if (window.navigator.onLine) {
-          try {
-            const fetchedValue = await fetch(url).then((resp) => resp.json());
-            setWords(fetchedValue);
-            await store.setItem(url, fetchedValue);
-          } catch (e) {
-            if (e instanceof Error) {
-              setError(e);
-            }
-          }
-        }
-      });
-  }, [lang, setWords, url]);
+    fetch(`https://lister.evanc.no/ordle/${lang}/words.json`)
+      .then((res) => res.json())
+      .then((words) => setWords(words))
+      .catch((e) => setError(e));
+  }, [lang]);
 
   if (error) {
-    console.log(`TCL ~ DataLoader ~ error:`, error);
     return (
       <div className={classes.center}>
         <h1>

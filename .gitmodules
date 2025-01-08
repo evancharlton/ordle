@@ -1,6 +1,3 @@
-[submodule "wordlist"]
-	path = wordlist
-	url = https://github.com/evancharlton/ordlist
 [submodule "src/spa-components"]
 	path = src/spa-components
 	url = https://github.com/evancharlton/spa-components

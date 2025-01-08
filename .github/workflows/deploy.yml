@@ -16,7 +16,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: "true"
-          token: ${{ secrets.ORDLIST_TOKEN }}
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
