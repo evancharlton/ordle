@@ -1,26 +1,16 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { Link } from "react-router";
 import classes from "./DataLoader.module.css";
 import { MdErrorOutline } from "react-icons/md";
 import { Context } from "./context";
 import Loading from "../../../Loading";
+import { useLanguageData } from "../../../spa-components/DataProvider";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const DataLoader = ({ children }: Props) => {
-  const { lang } = useParams();
-  const [words, setWords] = useState<string[]>([]);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    fetch(`https://lister.evanc.no/ordle/${lang}/words.json`)
-      .then((res) => res.json())
-      .then((words) => setWords(words))
-      .catch((e) => setError(e));
-  }, [lang]);
+  const { data: words, error } = useLanguageData<string[]>("words.json");
 
   if (error) {
     return (
@@ -34,7 +24,7 @@ const DataLoader = ({ children }: Props) => {
     );
   }
 
-  if (!words || words.length === 0) {
+  if (!words?.length) {
     return <Loading />;
   }
 
