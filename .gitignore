@@ -24,11 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Terraform/Tofu stuff
-.terraform
-.terraform.lock.hcl
-terraform.*.backup
-
 # Build artifacts
 *.tsbuildinfo
 

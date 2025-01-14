@@ -17,15 +17,6 @@ jobs:
           persist-credentials: false
           submodules: "true"
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v2"
-        with:
-          create_credentials_file: true
-          workload_identity_provider: "projects/594849475420/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
-
-      - uses: opentofu/setup-opentofu@v1
-
       - name: "Set environment variables"
         run: |
           echo "VITE_RELEASE=${GITHUB_SHA:0:8}" >> $GITHUB_ENV
@@ -35,17 +26,6 @@ jobs:
           PUBLIC_URL: /
         run: |
           ./build.sh
-
-      - name: Terraform
-        run: |
-          tofu init
-          tofu plan -no-color
-          tofu state rm cloudflare_zone_settings_override.ssl_settings || true
-          tofu apply -auto-approve
-        env:
-          TF_VAR_cloudflare_api_token: ${{ secrets.TF_VAR_cloudflare_api_token }}
-          TF_VAR_github_token: ${{ secrets.TF_VAR_github_token }}
-          TF_LOG: ${{ vars.TF_LOG }}
 
       - name: Upload static files as artifact
         id: deployment
