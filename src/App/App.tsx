@@ -4,7 +4,7 @@ import { RecoilRoot } from "recoil";
 import SettingsLoader from "./Setup/SettingsLoader";
 import WithLanguage from "./WithLanguage";
 import { Header } from "../spa-components/Header";
-import LanguageSelector from "../spa-components/LanguageSelector";
+import { LanguageProvider } from "../spa-components/LanguageSelector";
 import PwaContainer from "../spa-components/PwaContainer";
 import classes from "./Page.module.css";
 import Help from "../Game/Header/Help";
@@ -34,11 +34,18 @@ const Root = () => (
                   path=""
                   element={
                     <div className={classes.languages}>
-                      <LanguageSelector />
+                      <LanguageProvider />
                     </div>
                   }
                 />
-                <Route path="/:lang/*" element={<WithLanguage />} />
+                <Route
+                  path="/:lang/*"
+                  element={
+                    <LanguageProvider>
+                      <WithLanguage />
+                    </LanguageProvider>
+                  }
+                />
               </Route>
             </Routes>
           </HashRouter>
